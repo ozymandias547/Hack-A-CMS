@@ -1,0 +1,30 @@
+{
+  "default": {
+	"webservices": "http://webservices-test.vividseats.com",
+	"assets": "",
+	"GAAccount": "UA-508228-5",
+	"SiteCatalystAccount": "vividseatsdev",
+	"logLevel": "debug"
+  },
+  "test": {
+	"webservices": "http://webservices-test.vividseats.com",
+	"assets": "http://vividwebapp-test.vividseats.com",
+	"GAAccount": "UA-508228-5",
+	"SiteCatalystAccount": "vividseatsdev",
+	"logLevel": "error"
+  },
+  "sit03": {
+	"webservices": "http://webservices-sit.vividseats.com",
+	"assets": "",
+	"GAAccount": "UA-508228-5",
+	"SiteCatalystAccount": "vividseatsdev",
+	"logLevel": "error"
+  },
+  "prod": {
+	"webservices": "https://webservices.vividseats.com",
+	"assets": "https://nodejs.vividseats.com",
+	"GAAccount": "UA-508228-2",
+	"SiteCatalystAccount": "vividseatscom",
+	"logLevel": "error"
+  }
+}

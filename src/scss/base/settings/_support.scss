@@ -1,0 +1,14 @@
+// Configure cross-browser support on mobile.
+// ------------------------------------------
+
+// Only target mobile browsers.
+$supported-browsers: (
+	'android',
+	'android-chrome',
+	'android-firefox',
+	'blackberry',
+	'ie-mobile',
+	'ios-safari',
+	'opera-mini',
+	'opera-mobile'
+);

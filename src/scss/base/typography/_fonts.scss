@@ -1,0 +1,31 @@
+//TODO: Find out why Roboto isn't loading in SASS - Once it's working, remove the <link> call to google in the head of default.html
+//@import url(//fonts.googleapis.com/css?family=Roboto:400,500);
+
+$base-font-size: 16px;
+$base-line-height: $base-font-size * 1.5;
+
+$font-stack: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+$round-to-nearest-half-line: true;
+$rhythm-unit: 'rem';
+
+@include establish-baseline;
+
+$header-list: (
+	h1: 45px,
+	h2: 30px,
+	h3: 24px,
+	h4: 20px,
+	h5: 16px,
+	h6: 13px
+);
+
+#{headings(1, 6)}, strong {
+	font-weight: 500;
+}
+
+@each $header, $size in $header-list {
+	#{$header} {
+		@include adjust-font-size-to($size);
+	}
+}
