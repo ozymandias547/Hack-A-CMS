@@ -1,0 +1,9 @@
+{
+  "default": {
+	"webservices": "http://webservices-test.vividseats.com",
+	"assets": "",
+	"GAAccount": "",
+	"SiteCatalystAccount": "vividseatsdev",
+	"logLevel": "debug"
+  }
+}
