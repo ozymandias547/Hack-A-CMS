@@ -23,7 +23,7 @@ module.exports = {
 					{
 						test: /\.scss$/,
 						loader: ExtractTextPlugin.extract('css?sourceMap&-minimize!ruby-sass?outputStyle=compressed&compass&' +
-														   'requires[]=susy&requires[]=normalize-scss&' +
+														   'requires[]=susy&requires[]=normalize-skin&' +
 														   'includePaths[]=' + paths.scss.path)
 					}
 				]
@@ -68,7 +68,7 @@ module.exports = {
 					{
 						test: /\.scss$/,
 						loader: ExtractTextPlugin.extract('css?sourceMap!ruby-sass?outputStyle=expanded&compass&' +
-														   'requires[]=susy&requires[]=normalize-scss&' +
+														   'requires[]=susy&requires[]=normalize-skin&' +
 														   'includePaths[]=' + paths.scss.path)
 					}
 				]

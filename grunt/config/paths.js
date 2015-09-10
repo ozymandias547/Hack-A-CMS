@@ -15,11 +15,11 @@ var distServerPath = path.normalize(distPath + '/server');
 
 var gruntPath = path.normalize(process.cwd() + '/grunt');
 var jsPath = path.normalize(srcPath + '/**/!(vendor)');
-var scssPath = path.normalize(process.cwd() + '/scss');
+var scssPath = path.normalize(process.cwd() + '/skin');
 var templatePath = path.normalize(srcPath + '/template');
 
 var jscsConfig = path.normalize(gruntPath + '/config/.jscsrc');
-var scssLintConfig = path.normalize(gruntPath + '/config/.scss-lint.yml');
+var scssLintConfig = path.normalize(gruntPath + '/config/.skin-lint.yml');
 var karmaConfig = path.normalize(process.cwd() + '/karma.conf.js');
 
 var jsFiles = path.normalize(jsPath + '/*.js');
