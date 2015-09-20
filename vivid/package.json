@@ -1,0 +1,8 @@
+{
+  "name": "vivid",
+  "version": "1.0.0",
+  "description": "A Website Management System.",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
+}

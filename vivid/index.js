@@ -1,7 +1,7 @@
 var _ = require('underscore');
 var express = require('express');
 var fs = require('fs');
-var utils = require('./vivid-utils');
+var utils = require('./lib/vivid-utils');
 
 
 /*

@@ -21,8 +21,8 @@ module.exports = {
 			dest: paths.distServerPath
 		},
 		server: {
-			src: paths.srcPath+'/vivid.js',
-			dest: paths.distServerPath+'/vivid.js'
+			src: paths.srcPath+'/myBlog.js',
+			dest: paths.distServerPath+'/myBlog.js'
 		},
 		nodeModules: {
 			expand: true,

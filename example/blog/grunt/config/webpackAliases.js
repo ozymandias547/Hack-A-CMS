@@ -1,5 +1,5 @@
 var path = require('path');
-var	paths = require('../config/paths');
+var	paths = require('paths');
 
 module.exports = {
 	// Vendor aliases.

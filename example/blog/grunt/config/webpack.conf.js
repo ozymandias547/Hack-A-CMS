@@ -7,7 +7,7 @@
 var _ = require('lodash');
 var	path = require('path');
 var	webpack = require('webpack');
-var	paths = require('../config/paths');
+var	paths = require('paths');
 var environmentConfig = require('../../src/config/configLoader.js');
 
 var config = {
