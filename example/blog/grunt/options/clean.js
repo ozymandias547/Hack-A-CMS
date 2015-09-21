@@ -1,13 +1,13 @@
 /**
- * Clean task.
+ * Preflight task.
  */
 
 'use strict';
 
-var paths = require('../config/paths');
+var paths = require('../../config/grunt.conf.js');
 
 module.exports = {
 	clean: [
-		paths.distPath
+		paths.dist
 	]
 };

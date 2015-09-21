@@ -1,9 +1,0 @@
-{
-	"preset": "airbnb",
-	"disallowMixedSpacesAndTabs": "smart",
-	"disallowQuotedKeysInObjects": null,
-	"safeContextKeyword": null,
-	"validateIndentation": 4,
-	"validateIndentation": "\t",
-	"validateQuoteMarks": null
-}

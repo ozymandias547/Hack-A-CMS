@@ -4,21 +4,18 @@
 
 'use strict';
 
-var _ = require('lodash');
-var	path = require('path');
 var	webpack = require('webpack');
-var	paths = require('paths');
-var environmentConfig = require('../../src/config/configLoader.js');
+var	paths = require('./grunt.conf.js');
 
 var config = {
 
 	entry: {
-		home: path.normalize(paths.templatePath + '/home.js')
+		public: paths.webpackEntry
 	},
 
 	output: {
-		path: paths.distPublicPath,
-		publicPath: environmentConfig.assets + '/public/'
+		path: paths.dist,
+		publicPath: '/public/'
 	},
 	module: {
 		loaders: [
@@ -44,12 +41,7 @@ var config = {
 				loader: 'html-loader'
 			}
 		]
-	},
-	plugins: [
-		new webpack.ProvidePlugin({
-			_: 'underscore'
-		})
-	]
+	}
 };
 
 module.exports = config;

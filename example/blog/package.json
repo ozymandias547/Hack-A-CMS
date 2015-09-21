@@ -1,0 +1,26 @@
+{
+  "name": "Vivid CMS example blog site.",
+  "version": "1.0.0",
+  "description": "",
+  "main": "myBlog-server-app.js",
+  "author": "Joseph Jung",
+  "license": "ISC",
+  "dependencies": {
+    "glob": "5.0.14",
+    "grunt": "0.4.5",
+    "grunt-contrib-clean": "0.6.0",
+    "grunt-contrib-copy": "0.8.1",
+    "grunt-karma": "0.12.1",
+    "grunt-webpack": "1.0.11",
+    "jasmine-core": "2.3.4",
+    "karma": "0.13.9",
+    "karma-chrome-launcher": "0.2.0",
+    "karma-jasmine": "0.3.6",
+    "karma-webpack": "1.7.0",
+    "load-grunt-tasks": "3.2.0",
+    "lodash": "3.10.1",
+    "matchdep": "0.3.0",
+    "webpack": "1.12.2",
+    "webpack-dev-server": "1.11.0"
+  }
+}

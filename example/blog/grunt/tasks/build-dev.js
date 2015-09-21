@@ -1,7 +1,6 @@
 module.exports = function(grunt) {
 	grunt.registerTask('build-dev', [
 		'clean',
-		'webpack:build-dev',
-		'copy:publicDirs'
+		'webpack:build-dev'
 	]);
 };

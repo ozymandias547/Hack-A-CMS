@@ -4,12 +4,16 @@
 
 'use strict';
 
-var paths = require('../config/paths');
+var paths = require('../../config/grunt.conf.js');
 
 module.exports = {
 	karma: {
-		unit: {
-			configFile: paths.configFiles.karma
-		}
+        unit: {
+            configFile: process.cwd() + "/config/karma.conf.js",
+            port: 9999,
+            singleRun: true,
+            browsers: ['PhantomJS'],
+            logLevel: 'ERROR'
+        }
 	}
 };

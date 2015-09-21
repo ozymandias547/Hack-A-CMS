@@ -4,31 +4,35 @@
 
 'use strict';
 
-var paths = require('../config/paths');
+var paths = require('../../config/grunt.conf.js');
 
 module.exports = {
 	copy: {
 		publicDirs: {
 			expand: true,
-			cwd: paths.srcPath,
-			src: '+(asset)/**/*.*',
-			dest: paths.distPublicPath
-		},
-		serverDirs: {
-			expand: true,
-			cwd: paths.srcPath,
-			src: '+(lib)/**/*.*',
-			dest: paths.distServerPath
-		},
-		server: {
-			src: paths.srcPath+'/myBlog.js',
-			dest: paths.distServerPath+'/myBlog.js'
+			src: '+(component|layout|skin)/**/*.*',
+			dest: paths.dist
 		},
 		nodeModules: {
 			expand: true,
-			cwd: process.cwd()+'/node_modules',
-			src: '**/*.*',
-			dest: paths.distServerPath+'/node_modules'
-		}
+			src: '+(node_modules)/**/*.*',
+			dest: paths.dist
+		},
+		vividCMS: {
+            expand:true,
+			cwd: process.cwd() + '/../../vivid',
+            src: '**/*.*',
+			dest: paths.dist + "/vivid"
+		},
+		server: {
+			expand: true,
+			src: paths.serverFile,
+			dest: paths.dist
+		},
+        packageJSON: {
+            expand: true,
+            src: "package.json",
+            dest: paths.dist
+        }
 	}
 };
