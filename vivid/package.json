@@ -6,10 +6,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babel": "^5.8.23",
+    "bluebird": "^2.10.1",
+    "debug": "^2.2.0",
     "glob": "^5.0.14",
     "grunt": "^0.4.5",
     "load-grunt-tasks": "^3.2.0",
     "lodash": "^3.10.1",
-    "matchdep": "^0.3.0"
+    "matchdep": "^0.3.0",
+    "react": "^0.13.3",
+    "request": "^2.63.0"
   }
 }

@@ -1,14 +1,23 @@
-var _ = require('underscore');
-var express = require('express');
-var fs = require('fs');
+var _ = require('lodash');
 var utils = require('./lib/vivid-utils');
+var request = require('request');
+var Promise = require('bluebird');
+require("babel/register");
 
+Promise.promisifyAll(request);
 
-/*
- vivid will be an npm package.
+var Vivid = function() {
+    this._options = {};
+};
 
- start will:
- 1.  connect to the database through abstraction layer. (session and persistance)
- 2.  if tables are not present, generate them and create boilerplate routes.
- 3.  start serving routes based upon routes table
- */
+// Chores:
+// 1. setup connection to the main database
+// 2. build proper tables/collections
+// 2. setup admin endpoints
+// 2. setup browser route resolver
+// 2. create the database if it doesn't exist.
+
+Vivid.prototype.init = require("./lib/core/init");
+Vivid.prototype.start = require("./lib/core/start");
+
+module.exports = Vivid;
