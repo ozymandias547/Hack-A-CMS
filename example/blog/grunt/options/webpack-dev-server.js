@@ -12,7 +12,7 @@ module.exports = {
 	"webpack-dev-server": {
 		options: {
 			webpack: webpackConfig,
-			port: 7000
+			port: 8882
 		},
 		start: {
 			keepAlive: true,
@@ -25,11 +25,7 @@ module.exports = {
 					chunkFilename: '[name]/[id].common.js',
 					publicPath: 'http://localhost:8090/'
 				},
-				plugins: [
-					new webpack.ProvidePlugin({
-						_: 'lodash'
-					})
-				]
+				plugins: []
 			}
 		}
 	}

@@ -1,1 +1,1 @@
-console.log("I'm a component!");
+console.log("I'm a component!!!");
