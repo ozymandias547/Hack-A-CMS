@@ -4,35 +4,38 @@
 
 'use strict';
 
-var paths = require('../../config/grunt.conf.js');
+var buildConfig = require('../../config/grunt.conf.js');
 
 module.exports = {
 	copy: {
-		publicDirs: {
-			expand: true,
-			src: '+(component|layout|skin)/**/*.*',
-			dest: paths.dist
-		},
-		nodeModules: {
-			expand: true,
-			src: '+(node_modules)/**/*.*',
-			dest: paths.dist
-		},
-		vividCMS: {
-            expand:true,
-			cwd: process.cwd() + '/../../vivid',
-            src: '**/*.*',
-			dest: paths.dist + "/vivid"
-		},
-		server: {
-			expand: true,
-			src: paths.serverFile,
-			dest: paths.dist
-		},
-        packageJSON: {
-            expand: true,
-            src: "package.json",
-            dest: paths.dist
+        prod: {
+            files: [
+                {
+                    cwd: buildConfig.srcPath,
+                    expand: true,
+                    src: ['**/*.*'],
+                    dest: buildConfig.target
+                },
+                {
+                    cwd: process.cwd()+'/node_modules',
+                    expand: true,
+                    src: ['**/*.*'],
+                    dest: buildConfig.target + "/node_modules"
+                },
+                {
+                    cwd: process.cwd()+'/node_modules',
+                    expand: true,
+                    src: ['**/*.*'],
+                    dest: buildConfig.target + "/node_modules"
+                },
+                {
+                    cwd: process.cwd()+'/node_modules',
+                    expand: true,
+                    src: ['**/*.*'],
+                    dest: buildConfig.target + "/node_modules"
+                }
+            ]
         }
+
 	}
 };

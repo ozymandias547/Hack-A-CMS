@@ -7,7 +7,12 @@
 var paths = require('../../config/grunt.conf.js');
 
 module.exports = {
-	clean: [
-		paths.dist
-	]
+	clean : {
+        "dev": {
+            src: [ paths.assets ]
+        },
+        "prod": {
+            src: [ paths.target]
+        }
+    }
 };

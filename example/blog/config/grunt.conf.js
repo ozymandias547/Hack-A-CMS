@@ -3,9 +3,10 @@
  */
 
 'use strict';
-var vividConf = require('../vivid.conf.js');
 var concat = require('path').normalize;
 
-module.exports.webpackEntry = concat(process.cwd() + "/" + vividConf.common.browserEntry);
-module.exports.dist = concat(process.cwd() + "/" + vividConf.common.distributable);
-module.exports.serverFile = vividConf.common.serverEntry;
+module.exports.browserEntry = concat(process.cwd() + "/src/browser.js");
+module.exports.serverEntry = concat(process.cwd() + "/src/server.js");
+module.exports.assets = concat(process.cwd() + "/src/static");
+module.exports.target = concat(process.cwd() + "/target");
+module.exports.srcPath = concat(process.cwd() + "/src");

@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
 	grunt.registerTask('dev-server', [
-		'clean',
-		'copy:publicDirs',
+		'clean:dev',
+        'clean:prod',
 		'webpack-dev-server:start'
 	]);
 };

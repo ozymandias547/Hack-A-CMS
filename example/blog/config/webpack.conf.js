@@ -1,21 +1,16 @@
-/**
- * Webpack bundler configuration.
- */
-
 'use strict';
 
 var	webpack = require('webpack');
-var	paths = require('./grunt.conf.js');
+var	gruntConfig = require('./grunt.conf.js');
 
-var config = {
-
+module.exports = {
 	entry: {
-		public: paths.webpackEntry
+		app1: gruntConfig.browserEntry
 	},
-
 	output: {
-		path: paths.dist,
-		publicPath: '/public/'
+		path: gruntConfig.assets,
+        filename: '[name]/[hash:8].bundle.js',
+        chunkFilename: '[name]/[id].[hash:8].common.js'
 	},
 	module: {
 		loaders: [
@@ -44,4 +39,3 @@ var config = {
 	}
 };
 
-module.exports = config;

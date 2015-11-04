@@ -1,5 +1,5 @@
 {
-  "name": "Vivid CMS example blog site.",
+  "name": "blogsite",
   "version": "1.0.0",
   "description": "",
   "main": "myBlog-server-app.js",
