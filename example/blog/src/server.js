@@ -1,16 +1,18 @@
-//var Vivid = require('../../../vivid/index.js');    // When vivid is an npm package, this will be require('vivid');
-//var myBlog = new Vivid();
-//
-//myBlog.init('./vivid.conf.js');
-//myBlog.start();
+var Vivid = require('../../../vivid/index.js');    // When vivid is an npm package, this will be require('vivid');
 
-var express = require('express');
-var app = express();
+var envs = {
+    dev: {
+        port: 8000,
+        db: {
+            type: "mongo",
+            path: "localhost:27017"
+        }
+    }
+};
 
-app.get('/', function(req, res){
-    res.send('hello worldasdf there!!!!');
-});
 
-console.log("hi");
+Vivid.configure(envs["dev"]);
+Vivid.start();
 
-app.listen(8881);
+
+

@@ -2,12 +2,14 @@ var _ = require('lodash');
 var utils = require('./lib/vivid-utils');
 var request = require('request');
 var Promise = require('bluebird');
+var express = require('express');
 require("babel/register");
 
 Promise.promisifyAll(request);
 
 var Vivid = function() {
     this._options = {};
+    this._express = express();
 };
 
 // Chores:
@@ -17,7 +19,9 @@ var Vivid = function() {
 // 2. setup browser route resolver
 // 2. create the database if it doesn't exist.
 
-Vivid.prototype.init = require("./lib/core/init");
+Vivid.prototype.configure = require("./lib/core/configure");
 Vivid.prototype.start = require("./lib/core/start");
 
-module.exports = Vivid;
+var vividSingleton = new Vivid();
+
+module.exports = vividSingleton;

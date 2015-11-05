@@ -4,10 +4,10 @@ function start() {
 
     debug('Starting the Vivid CMS App');
 
-    var vivid = this;
+    var _this = this;
 
-    this.app.listen(this._options.port, function () {
-        console.log('\'%s\' Vivid App listening on port %d.', vivid._options.name, vivid._options.port);
+    this._express.listen(this._options.port, function () {
+        console.log('Vivid App listening on port %d.', _this.port);
     });
 
 }
