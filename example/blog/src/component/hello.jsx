@@ -1,10 +1,10 @@
-import './SampleComponent.sass';
+import './hello.scss';
 import React, { Component } from 'react';
 
-React.createClass({
-    render: function() {
+class Hello extends Component {
+    render() {
         return <div>Hello {this.props.name}</div>;
     }
-});
+}
 
-ReactDOM.render(<HelloMessage name="John Doe hello" />, mountNode);
+export default Hello;

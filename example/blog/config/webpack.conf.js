@@ -14,27 +14,15 @@ module.exports = {
 	},
 	module: {
 		loaders: [
-			{
-				test: /\.gif/,
-				loader: 'url-loader?limit=10000&mimetype=image/gif'
-			},
-			{
-				test: /\.jpg/,
-				loader: 'url-loader?limit=10000&mimetype=image/jpg'
-			},
-			{
-				test: /\.png/,
-				loader: 'url-loader?limit=10000&mimetype=image/png'
-			},
-			{
-				test: /\.svg/,
-				loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
-			},
-			{
-				test: /\.html/,
-				exclude: [/node_modules/, /scripts/],
-				loader: 'html-loader'
-			}
+            {
+                test: /\.scss$/,
+                loaders: ["style", "css", "sass"]
+            },
+            {
+                test: /\.jsx?$/,
+                exclude: /(node_modules|bower_components)/,
+                loader: 'babel' // 'babel-loader' is also a legal name to reference
+            }
 		]
 	}
 };
