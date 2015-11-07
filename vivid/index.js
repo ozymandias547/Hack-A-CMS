@@ -3,7 +3,7 @@ var utils = require('./lib/vivid-utils');
 var request = require('request');
 var Promise = require('bluebird');
 var express = require('express');
-require("babel/register");
+require("babel-core/register");
 
 Promise.promisifyAll(request);
 

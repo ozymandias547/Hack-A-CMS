@@ -14,7 +14,8 @@
     "load-grunt-tasks": "^3.2.0",
     "lodash": "^3.10.1",
     "matchdep": "^0.3.0",
-    "react": "^0.13.3",
+    "react": "^0.14.2",
+    "react-dom": "^0.14.2",
     "request": "^2.63.0"
   }
 }

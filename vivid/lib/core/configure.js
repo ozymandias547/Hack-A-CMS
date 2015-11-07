@@ -8,6 +8,10 @@ function configure(config) {
 
     this.port = config.port || 8080;
 
+    this.components = {
+        HelloComponent : require('../../component/hello.jsx')
+    };
+
 }
 
 module.exports = configure;
