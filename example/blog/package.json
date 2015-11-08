@@ -20,8 +20,6 @@
     "load-grunt-tasks": "3.2.0",
     "lodash": "3.10.1",
     "matchdep": "0.3.0",
-    "react": "^0.14.2",
-    "react-dom": "^0.14.2",
     "webpack": "1.12.2",
     "webpack-dev-server": "1.11.0"
   },
@@ -30,9 +28,6 @@
     "babel-loader": "5.1.3",
     "babel-preset-es2015": "^6.1.2",
     "css-loader": "^0.22.0",
-    "grunt-concurrent": "^2.0.4",
-    "grunt-contrib-watch": "^0.6.1",
-    "grunt-express-server": "^0.5.1",
     "node-sass": "^3.4.1",
     "sass-loader": "^3.1.1",
     "style-loader": "0.13.0"
