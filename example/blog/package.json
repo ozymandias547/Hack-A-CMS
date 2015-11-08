@@ -35,6 +35,6 @@
     "grunt-express-server": "^0.5.1",
     "node-sass": "^3.4.1",
     "sass-loader": "^3.1.1",
-    "style-loader": "file:node_modules/style-loader"
+    "style-loader": "0.13.0"
   }
 }
