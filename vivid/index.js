@@ -21,6 +21,7 @@ var Vivid = function() {
 
 Vivid.prototype.configure = require("./lib/core/configure");
 Vivid.prototype.start = require("./lib/core/start");
+Vivid.prototype.addRoute = require("./lib/core/route").addRoute;
 
 var vividSingleton = new Vivid();
 

@@ -6,11 +6,9 @@ function configure(config) {
 
     debug('Configuring the Vivid CMS App');
 
-    this.port = config.port || 8080;
-
-    this.components = {
-        HelloComponent : require('../../component/hello.jsx')
-    };
+    this.settings = {};
+    this._components = [];
+    this.settings.port = config.port || 8080;
 
 }
 

@@ -1,6 +1,4 @@
 var debug = require('debug')('vivid:core:init');
-var React = require('react');
-var ReactDOMServer = require('react-dom/server');
 
 function start() {
 
@@ -8,14 +6,14 @@ function start() {
 
     var _this = this;
 
-    this._express.get("/", function(req, res) {
-        res.send(ReactDOMServer.renderToStaticMarkup(React.createElement(_this.components["HelloComponent"], { name: "Vivid CMS" })));
-    });
+    require('../../admin/')(this);
 
-    this._express.listen(this.port, function () {
-        console.log('Vivid App listening on port %d.', _this.port);
+    this._express.listen(this.settings.port, function () {
+        console.log('Vivid App listening on port %d.', _this.settings.port);
     });
 
 }
+
+
 
 module.exports = start;

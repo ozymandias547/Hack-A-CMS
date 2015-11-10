@@ -1,23 +1,19 @@
 {
   "name": "vivid",
-  "version": "1.0.0",
-  "description": "A Website Management System.",
+  "version": "0.1.0",
+  "description": "A Website Management and CMS System.",
   "main": "index.js",
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "babel": "^5.8.23",
+    "babel": "5.8.23",
     "babel-core": "5.2.1",
-    "bluebird": "^2.10.1",
-    "debug": "^2.2.0",
-    "express": "^4.13.3",
-    "glob": "^5.0.14",
-    "grunt": "^0.4.5",
-    "load-grunt-tasks": "^3.2.0",
-    "lodash": "^3.10.1",
-    "matchdep": "^0.3.0",
-    "react": "^0.14.2",
-    "react-dom": "^0.14.2",
-    "request": "^2.63.0"
+    "bluebird": "2.10.1",
+    "debug": "2.2.0",
+    "express": "4.13.3",
+    "lodash": "3.10.1",
+    "react": "0.14.2",
+    "react-dom": "0.14.2",
+    "request": "2.63.0"
   }
 }
