@@ -7,7 +7,6 @@ function configure(config) {
     debug('Configuring the Vivid CMS App');
 
     this.settings = {};
-    this._components = [];
     this.settings.port = config.port || 8080;
 
 }

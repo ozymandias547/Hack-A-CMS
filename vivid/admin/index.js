@@ -5,7 +5,7 @@ module.exports = function(vivid) {
 
     vivid.addLayout({
         name: "admin/LayoutOneColumn", 
-        component: require("./component/LayoutOneColumn/LayoutOneColumn.jsx"),
+        component: require("./layout/LayoutOneColumn/LayoutOneColumn.js"),
         contract: {
             slot1: {
                 required: false
@@ -13,21 +13,47 @@ module.exports = function(vivid) {
         }
     });
 
-    vivid.addPageLayout({
-        name: "admin/routes",
-        layout: "admin/LayoutOneColumn",
-        slots: {
-            slot1: "Welcome!"
-        }
+    vivid.addComponent({
+        name: "admin/RouteManagerComponent",
+        component: require("./component/RouteManagerComponent/RouteManagerComponent.js"),
+        data: ["routes"]
     });
 
     vivid.addRoute({
         url: "/",
-        pageLayout: "admin/routes",
+        name: "admin/routes",
+        layout: "admin/LayoutOneColumn",
+        pageLayout: {
+            content: [
+                {
+                    name: "welcomeArticle",
+                    type: "article"
+                },
+                {
+                    name: "admin/RouteManagerComponent",
+                    type: "component"
+                }
+            ]
+        },
         data: {
             meta: {
-                title: "Vivid CMS: Routes"
-            }
+                title: "Boo!"
+            },
+            welcomeArticle: "<strong>Welcome to Vivid CMS!</strong>",
+            routes: [
+                {
+                    name: "Blog post 1",
+                    text: "WOOOOOT"
+                },
+                {
+                    name: "Blog post 2",
+                    text: "WOOOOOT"
+                },
+                {
+                    name: "Blog post 3",
+                    text: "WOOOOOT"
+                }
+            ]
         }
     });
 
