@@ -17,19 +17,7 @@ module.exports = {
                     dest: buildConfig.target
                 },
                 {
-                    cwd: process.cwd()+'/node_modules',
-                    expand: true,
-                    src: ['**/*.*'],
-                    dest: buildConfig.target + "/node_modules"
-                },
-                {
-                    cwd: process.cwd()+'/node_modules',
-                    expand: true,
-                    src: ['**/*.*'],
-                    dest: buildConfig.target + "/node_modules"
-                },
-                {
-                    cwd: process.cwd()+'/node_modules',
+                    cwd: process.cwd() + '/node_modules',
                     expand: true,
                     src: ['**/*.*'],
                     dest: buildConfig.target + "/node_modules"

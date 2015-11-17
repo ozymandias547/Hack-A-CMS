@@ -1,2 +1,1 @@
-require.context("./component", true, /\.js$|\.jsx$/);
-
+require.context("./admin/component", true, /\.js$|\.jsx$/);
