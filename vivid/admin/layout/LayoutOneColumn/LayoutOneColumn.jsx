@@ -16,7 +16,7 @@ var LayoutOneColumn = React.createClass({
                     <title>{this.props.data.meta.title}</title>
                 </head>
                 <body>
-                {this.blocks.content1}
+                    {this.blocks.content1}
                 </body>
             </html>
         );

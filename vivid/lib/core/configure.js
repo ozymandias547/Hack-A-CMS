@@ -1,14 +1,11 @@
-var debug = require('debug')('vivid:core:init');
 var _ = require('lodash');
 var express = require('express');
 
-function configure(config) {
+module.exports.configure = function(config) {
 
-    debug('Configuring the Vivid CMS App');
+    if (typeof config !== "undefined") {
+        this.mode = config.mode ? config.mode : this.mode;
+        this.port = config.port ? config.port : this.port;
+    }
 
-    this.settings = {};
-    this.settings.port = config.port || 8080;
-
-}
-
-module.exports = configure;
+};

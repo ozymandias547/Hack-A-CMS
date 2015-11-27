@@ -1,4 +1,3 @@
-
 var React = require('react');
 var _ = require('underscore');
 
@@ -18,7 +17,7 @@ module.exports.createBlockContent = function(name, props) {
                     content.push(React.createElement("div", {
                         className: "content",
                         dangerouslySetInnerHTML: {
-                            __html: pageData.welcomeArticle
+                            __html: pageData[part.name]
                         }
                     }));
                 }
@@ -26,7 +25,7 @@ module.exports.createBlockContent = function(name, props) {
                 if (part.type === "component") {
 
                     var componentData = {};
-                    var Component = _.findWhere(_this._components, {name: part.name});
+                    var Component = _.findWhere(_this.components, {name: part.name});
 
                     Component.data.forEach(function(d) {
                         componentData[d] = pageData[d];
@@ -43,6 +42,6 @@ module.exports.createBlockContent = function(name, props) {
 
     return content;
 
-}
+};
 
 

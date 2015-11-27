@@ -1,9 +1,9 @@
 var express = require('express');
 var React = require('react');
 
-module.exports.register = function(vivid) {
+module.exports.register = function(Vivid) {
 
-    vivid.addLayout({
+    Vivid.registerLayout({
         name: "admin/LayoutOneColumn",
         component: require("./layout/LayoutOneColumn/LayoutOneColumn.jsx"),
         contract: {
@@ -13,13 +13,13 @@ module.exports.register = function(vivid) {
         }
     });
 
-    vivid.addComponent({
+    Vivid.registerComponent({
         name: "admin/RouteManagerComponent",
         component: require("./component/RouteManagerComponent/RouteManagerComponent.jsx"),
         data: ["routes"]
     });
 
-    vivid.addComponent({
+    Vivid.registerComponent({
         name: "admin/AdminNavComponent",
         component: require("./component/AdminNavComponent/AdminNavComponent.jsx"),
         data: []
@@ -27,9 +27,9 @@ module.exports.register = function(vivid) {
 
 };
 
-module.exports.addRoutes = function(vivid) {
+module.exports.addRoutes = function(Vivid) {
 
-    vivid.addRoute({
+    Vivid.route({
         url: "/",
         name: "admin/routes",
         layout: "admin/LayoutOneColumn",
@@ -51,7 +51,7 @@ module.exports.addRoutes = function(vivid) {
         },
         data: {
             meta: {
-                title: "Boo!"
+                title: "Vivid Routes"
             },
             welcomeArticle: "<strong>Welcome to Vivid CMS!</strong>",
             routes: [
@@ -76,7 +76,7 @@ module.exports.addRoutes = function(vivid) {
     });
 
 
-    vivid.addRoute({
+    Vivid.route({
         url: "/config",
         name: "admin/config",
         layout: "admin/LayoutOneColumn",
@@ -94,13 +94,13 @@ module.exports.addRoutes = function(vivid) {
         },
         data: {
             meta: {
-                title: "Boo!"
+                title: "Vivid Config"
             },
             welcomeArticle: "<strong>Config</strong>"
         }
     });
 
-    vivid.addRoute({
+    Vivid.route({
         url: "/route-layout/*",
         name: "admin/route-layout",
         layout: "admin/LayoutOneColumn",
@@ -113,13 +113,18 @@ module.exports.addRoutes = function(vivid) {
                 {
                     name: "welcomeArticle",
                     type: "article"
+                },
+                {
+                    name: "randomArticle",
+                    type: "article"
                 }
             ]
         },
         data: {
             welcomeArticle: "<strong>Route layout</strong>",
+            randomArticle: "<strong>Random text</strong>",
             meta: {
-                title: "Route Layouts"
+                title: "Vivid Route Layouts"
             }
         }
     });
