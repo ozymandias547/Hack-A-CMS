@@ -5,24 +5,22 @@ module.exports.register = function(Vivid) {
 
     Vivid.registerLayout({
         name: "admin/LayoutOneColumn",
-        component: require("./layout/LayoutOneColumn/LayoutOneColumn.jsx"),
-        contract: {
-            content1: {
-                required: false
-            }
-        }
+        component: require("./layout/LayoutOneColumn/LayoutOneColumn.jsx")
     });
 
     Vivid.registerComponent({
         name: "admin/RouteManagerComponent",
-        component: require("./component/RouteManagerComponent/RouteManagerComponent.jsx"),
-        data: ["routes"]
+        component: require("./component/RouteManagerComponent/RouteManagerComponent.jsx")
     });
 
     Vivid.registerComponent({
         name: "admin/AdminNavComponent",
-        component: require("./component/AdminNavComponent/AdminNavComponent.jsx"),
-        data: []
+        component: require("./component/AdminNavComponent/AdminNavComponent.jsx")
+    });
+
+    Vivid.registerComponent({
+        name: "admin/RouteDescriptionComponent",
+        component: require("./component/RouteDescription/RouteDescriptionComponent.jsx")
     });
 
 };
@@ -33,6 +31,17 @@ module.exports.addRoutes = function(Vivid) {
         url: "/",
         name: "admin/routes",
         layout: "admin/LayoutOneColumn",
+        resolve: [
+            {
+                name: "welcomePageMeta"
+            },
+            {
+                name: "welcomeArticle"
+            },
+            {
+                name: "routes"
+            }
+        ],
         pageLayout: {
             content1: [
                 {
@@ -46,88 +55,40 @@ module.exports.addRoutes = function(Vivid) {
                 {
                     name: "admin/RouteManagerComponent",
                     type: "component"
-                }
-            ]
-        },
-        data: {
-            meta: {
-                title: "Vivid Routes"
-            },
-            welcomeArticle: "<strong>Welcome to Vivid CMS!</strong>",
-            routes: [
-                {
-                    name: "Blog post 1",
-                    text: "WOOOOOT"
                 },
                 {
-                    name: "Blog post 2",
-                    text: "WOOOOOT"
-                },
-                {
-                    name: "Blog post 3",
-                    text: "WOOOOOT"
-                },
-                {
-                    name: "Blog post 4",
-                    text: "WOOOOOT"
+                    name: "admin/RouteDescriptionComponent",
+                    type: "component"
                 }
             ]
         }
     });
-
 
     Vivid.route({
         url: "/config",
         name: "admin/config",
         layout: "admin/LayoutOneColumn",
-        pageLayout: {
-            content1: [
-                {
-                    name: "admin/AdminNavComponent",
-                    type: "component"
-                },
-                {
-                    name: "welcomeArticle",
-                    type: "article"
-                }
-            ]
-        },
-        data: {
-            meta: {
-                title: "Vivid Config"
-            },
-            welcomeArticle: "<strong>Config</strong>"
-        }
-    });
-
-    Vivid.route({
-        url: "/route-layout/*",
-        name: "admin/route-layout",
-        layout: "admin/LayoutOneColumn",
-        pageLayout: {
-            content1: [
-                {
-                    name: "admin/AdminNavComponent",
-                    type: "component"
-                },
-                {
-                    name: "welcomeArticle",
-                    type: "article"
-                },
-                {
-                    name: "randomArticle",
-                    type: "article"
-                }
-            ]
-        },
-        data: {
-            welcomeArticle: "<strong>Route layout</strong>",
-            randomArticle: "<strong>Random text</strong>",
-            meta: {
-                title: "Vivid Route Layouts"
+        resolve: [
+            {
+                name: "configData"
             }
+        ],
+        pageLayout: {
+            content1: [
+                {
+                    name: "admin/AdminNavComponent",
+                    type: "component"
+                },
+                {
+                    name: "configArticle",
+                    type: "article"
+                },
+                {
+                    name: "admin/RouteDescriptionComponent",
+                    type: "component"
+                }
+            ]
         }
     });
-
 
 };

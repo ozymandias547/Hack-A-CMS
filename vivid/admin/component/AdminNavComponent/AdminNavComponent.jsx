@@ -5,7 +5,6 @@ var AdminNavComponent = React.createClass({
         return (
             <div>
                 <a href="/">Route Manager</a>
-                <a href="/route-layout/1">Route Layout Example</a>
                 <a href="/config">Config</a>
             </div>
         );

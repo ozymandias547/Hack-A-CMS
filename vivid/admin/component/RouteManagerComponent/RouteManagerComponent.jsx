@@ -10,7 +10,7 @@ var RouteManagerComponent = React.createClass({
         return (
             <div>
                 <h4>Route Manager Component:</h4>
-                {this.props.routes.map(routeItem)}
+                {this.props.appStore.routes.map(routeItem)}
             </div>
         );
     }
