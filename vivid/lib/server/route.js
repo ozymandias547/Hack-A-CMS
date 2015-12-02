@@ -3,7 +3,7 @@ var Redux = require('redux');
 var Provider = require('react-redux').Provider;
 var ReactDOMServer = require('react-dom/server');
 var _ = require('underscore');
-var adminEco = require('../../admin');
+var adminEco = require('../../admin/index');
 
 module.exports.route = function(route) {
 

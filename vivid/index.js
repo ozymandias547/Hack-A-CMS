@@ -4,7 +4,7 @@ var request = require('request');
 var Promise = require('bluebird');
 var express = require('express');
 
-require("babel-core/register")({retainLines: true});
+require("babel-register")({retainLines: true});
 
 //Promise.promisifyAll(request);
 
@@ -18,12 +18,12 @@ var Vivid = function() {
 };
 
 _.extend(Vivid.prototype,
-    require("./lib/core/configure"),
-    require("./lib/core/start"),
-    require("./lib/core/register"),
-    require("./lib/core/layout"),
-    require("./lib/core/resolver"),
-    require("./lib/core/route")
+    require("./lib/server/configure"),
+    require("./lib/start"),
+    require("./lib/register"),
+    require("./lib/layout"),
+    require("./lib/server/resolver"),
+    require("./lib/server/route")
 );
 
 var vividSingleton = new Vivid();

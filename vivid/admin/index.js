@@ -1,11 +1,10 @@
-var express = require('express');
 var React = require('react');
 
 module.exports.register = function(Vivid) {
 
     Vivid.registerLayout({
         name: "admin/LayoutOneColumn",
-        component: require("./layout/LayoutOneColumn/LayoutOneColumn.jsx")
+        component: require("./layout/LayoutOneColumn/LayoutOneColumn.jsx")(Vivid)
     });
 
     Vivid.registerComponent({

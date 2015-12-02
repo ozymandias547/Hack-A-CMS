@@ -2,9 +2,11 @@
 
 var	webpack = require('webpack');
 var	gruntConfig = require('./grunt.conf.js');
+var path = require('path');
 
 module.exports = {
-	entry: {
+    context: gruntConfig.srcPath,
+    entry: {
 		app1: gruntConfig.browserEntry
 	},
 	output: {
@@ -12,6 +14,15 @@ module.exports = {
         filename: '[name]/[hash:8].bundle.js',
         chunkFilename: '[name]/[id].[hash:8].common.js'
 	},
+    devtool: 'source-map',
+    resolveLoader: {
+        modulesDirectories: [
+            path.join(__dirname, "..", "node_modules")
+        ]
+    },
+    resolve: {
+        extensions: ['', '.webpack.js', '.web.js', '.js', '.jsx', '.json']
+    },
 	module: {
 		loaders: [
             {
@@ -19,9 +30,12 @@ module.exports = {
                 loaders: ["style", "css", "sass"]
             },
             {
-                test: /\.jsx?$/,
+                test: /\.jsx$/,
                 exclude: /(node_modules|bower_components)/,
-                loader: 'babel' // 'babel-loader' is also a legal name to reference
+                loader: 'babel-loader',
+                query: {
+                    presets:['react']
+                }
             }
 		]
 	}

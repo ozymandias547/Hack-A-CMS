@@ -34,4 +34,3 @@ module.exports.createBlockContent = function(name, props) {
 
 };
 
-

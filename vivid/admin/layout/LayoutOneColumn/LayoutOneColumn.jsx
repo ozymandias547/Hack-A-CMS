@@ -1,50 +1,53 @@
 var React = require('react');
-var Redux = require('redux');
 var ReactRedux = require('react-redux');
 var _ = require('underscore');
-var Vivid = require('../../../index.js');
 
-var LayoutOneColumn = React.createClass({
-    render: function() {
+module.exports = function(Vivid) {
 
-        var _this = this;
+    var LayoutOneColumn = React.createClass({
+        render: function() {
 
-        // Build components array that will go into the blocks of the layout.
-        this.blocks = {
-            content1 : Vivid.createBlockContent("content1", this.props)
-        };
+            var _this = this;
 
-        function createPayload() {
+            // Build components array that will go into the blocks of the layout.
+            this.blocks = {
+                content1 : Vivid.createBlockContent("content1", this.props)
+            };
 
-            var payload = _.omit(_this.props, "appStore");
+            function createPayload() {
 
-            return {
-                __html: 'window.__INITIAL_STATE=' + JSON.stringify(payload)
+                var payload = _.omit(_this.props, "appStore");
+
+                return {
+                    __html: 'window.__INITIAL_STATE=' + JSON.stringify(payload)
+                }
             }
-        }
 
-        return (
-            <html>
-                <head>
-                    <title>{this.props.appStore.meta.title}</title>
-                </head>
-                <body>
+            return (
+                <html>
+                    <head>
+                        <title>{this.props.appStore.meta.title}</title>
+                    </head>
+                    <body>
                     {this.blocks.content1}
-                    <script dangerouslySetInnerHTML={ createPayload() }></script>
-                </body>
-            </html>
-        );
+                        <script dangerouslySetInnerHTML={ createPayload() }></script>
+                        <script src="http://localhost:8882/app1/bundle.js"></script>
+                    </body>
+                </html>
+            );
 
+        }
+    });
+
+    function mapStateToProps(appStore) {
+        return {
+            appStore: appStore.pages[appStore.currentUrl]
+        }
     }
-});
-
-function mapStateToProps(appStore) {
-
-    return {
-        appStore: appStore.pages[appStore.currentUrl]
-    }
-
-}
 
 
-module.exports = ReactRedux.connect(mapStateToProps, null)(LayoutOneColumn);
+    return ReactRedux.connect(mapStateToProps, null)(LayoutOneColumn);
+
+};
+
+

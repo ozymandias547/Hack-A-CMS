@@ -1,5 +1,11 @@
 var Vivid = require('../../../vivid/vivid-browser.js');
 
-var myBlogSite = new Vivid();
+var envs = {
+    dev: {
+        mode: "dev"
+    }
+};
 
-myBlogSite.start();
+Vivid.configure(envs["dev"]);
+Vivid.start();
+

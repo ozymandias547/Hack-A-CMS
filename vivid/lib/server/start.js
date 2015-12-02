@@ -1,9 +1,6 @@
-var debug = require('debug')('vivid:core:init');
 var path = require('path');
 
 module.exports.start = function() {
-
-    debug('Vivid CMS App start sequence.');
 
     // Cache busting for .jsx modules.  this allows reloading of .jsx without bouncing the server.
     if (this.mode === "dev") {
@@ -17,7 +14,7 @@ module.exports.start = function() {
         });
     }
 
-    var adminEco = require('../../admin/');
+    var adminEco = require('../../admin/index');
 
     adminEco.register(this);
     adminEco.addRoutes(this);
