@@ -39,13 +39,23 @@ module.exports.route = function(route) {
         var store = configureStore(initialState);
         var payload = store.getState();
 
-        var html = ReactDOMServer.renderToString(React.createElement(
+        var appHtml = ReactDOMServer.renderToString(React.createElement(
             Provider,
             { store: store },
             React.createElement(layout.component, payload)
         ));
 
-        res.send(html);
+        res.send(
+            "<html>" +
+            "<head>" +
+                "<script>var __PAYLOAD__ = " + JSON.stringify(payload) + "</script>" +
+                "<script src='http://localhost:8882/app1/bundle.js'></script>" +
+            "</head>" +
+            "<body>" +
+                "<div id='ROOT_CONTAINER'>" + appHtml + "</div>" +
+            "</body>"
+
+        );
 
     });
 

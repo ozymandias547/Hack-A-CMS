@@ -5,6 +5,7 @@ var _ = require('underscore');
 module.exports = function(Vivid) {
 
     var LayoutOneColumn = React.createClass({
+
         render: function() {
 
             var _this = this;
@@ -24,25 +25,16 @@ module.exports = function(Vivid) {
             }
 
             return (
-                <html>
-                    <head>
-                        <title>{this.props.appStore.meta.title}</title>
-                    </head>
-                    <body>
+                <div>
                     {this.blocks.content1}
-                        <script dangerouslySetInnerHTML={ createPayload() }></script>
-                        <script src="http://localhost:8882/app1/bundle.js"></script>
-                    </body>
-                </html>
+                </div>
             );
 
         }
     });
 
     function mapStateToProps(appStore) {
-        return {
-            appStore: appStore.pages[appStore.currentUrl]
-        }
+       return appStore;
     }
 
 

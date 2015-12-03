@@ -1,3 +1,4 @@
+var ReactDOM = require('react-dom');
 var React = require('react');
 var Redux = require('redux');
 var Provider = require('react-redux').Provider;
@@ -7,20 +8,13 @@ module.exports.route = function(route) {
 
     var _this = this;
 
-};
+    this.routes[route.name] = route;
 
-function configureStore(initialState, action) {
+    this.router.on(route.url, function() {
 
-    return Redux.createStore(function(state, actionType) {
-
-        var state = state || initialState;
-
-        switch (actionType) {
-            default : return state;
-        }
-
-        return state;
-
+        // Browser Render pipeline
+        var pageData = _this.resolveData(route);
+        _this.appStore.dispatch({type: 'changePage', currentUrl : window.location.pathname, pageData: pageData});
     });
 
-}
+};

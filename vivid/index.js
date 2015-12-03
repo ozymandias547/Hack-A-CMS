@@ -19,10 +19,10 @@ var Vivid = function() {
 
 _.extend(Vivid.prototype,
     require("./lib/server/configure"),
-    require("./lib/start"),
+    require("./lib/server/start"),
     require("./lib/register"),
     require("./lib/layout"),
-    require("./lib/server/resolver"),
+    require("./lib/resolver"),
     require("./lib/server/route")
 );
 

@@ -29,13 +29,20 @@ module.exports.resolveData = function(route) {
         };
     }
 
-
     if (route.url === "/config") {
         return {
             meta: {
                 title: "Vivid Configuration"
             },
             configArticle: "<strong>This is config</strong>"
+        };
+    }
+
+    if (route.url === "/users") {
+        return {
+            meta: {
+                title: "Users"
+            }
         };
     }
 

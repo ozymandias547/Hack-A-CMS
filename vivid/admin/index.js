@@ -14,7 +14,7 @@ module.exports.register = function(Vivid) {
 
     Vivid.registerComponent({
         name: "admin/AdminNavComponent",
-        component: require("./component/AdminNavComponent/AdminNavComponent.jsx")
+        component: require("./component/AdminNavComponent/AdminNavComponent.jsx")(Vivid)
     });
 
     Vivid.registerComponent({
@@ -56,6 +56,10 @@ module.exports.addRoutes = function(Vivid) {
                     type: "component"
                 },
                 {
+                    name: "admin/RouteManagerComponent",
+                    type: "component"
+                },
+                {
                     name: "admin/RouteDescriptionComponent",
                     type: "component"
                 }
@@ -81,6 +85,29 @@ module.exports.addRoutes = function(Vivid) {
                 {
                     name: "configArticle",
                     type: "article"
+                },
+                {
+                    name: "admin/RouteDescriptionComponent",
+                    type: "component"
+                }
+            ]
+        }
+    });
+
+    Vivid.route({
+        url: "/users",
+        name: "admin/users",
+        layout: "admin/LayoutOneColumn",
+        resolve: [
+            {
+                name: "userData"
+            }
+        ],
+        pageLayout: {
+            content1: [
+                {
+                    name: "admin/AdminNavComponent",
+                    type: "component"
                 },
                 {
                     name: "admin/RouteDescriptionComponent",
