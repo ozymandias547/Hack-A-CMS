@@ -7,7 +7,7 @@ var initialState = {};
 
 module.exports._addHardCodedComponentReducers = function(initialState) {
 
-    // TODO: (critical) Find how to get the component reducer data on the server.
+    // TODO: Reanalyze and refactor for clarity
 
     var payload;
 
