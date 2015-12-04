@@ -9,6 +9,7 @@
     "babel-preset-react": "^6.1.18",
     "babel-register": "^6.2.0",
     "bluebird": "2.10.1",
+    "clone": "^1.0.2",
     "debug": "2.2.0",
     "director": "^1.2.8",
     "express": "4.13.3",
@@ -20,5 +21,8 @@
     "redux-devtools": "^2.1.5",
     "request": "2.63.0",
     "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "redux-devtools": "^2.1.5"
   }
 }

@@ -7,14 +7,23 @@ var _ = require('underscore');
 module.exports.route = function(route) {
 
     var _this = this;
+    var hasLoadedData = false;
+
 
     this.routes[route.name] = route;
 
     this.router.on(route.url, function() {
 
         // Browser Render pipeline
-        var pageData = _this.resolveData(route);
-        _this.appStore.dispatch({type: 'changePage', currentUrl : window.location.pathname, pageData: pageData});
+
+        if (!hasLoadedData) {
+            var pageData = _this.resolveData(route);
+            _this.appStore.dispatch({type: 'changePage', currentUrl : window.location.pathname, pageData: pageData});
+            hasLoadedData = true;
+        } else {
+            _this.appStore.dispatch({type: 'changePage', currentUrl : window.location.pathname});
+        }
+
     });
 
 };

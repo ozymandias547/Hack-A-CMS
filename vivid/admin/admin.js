@@ -9,7 +9,8 @@ module.exports.register = function(Vivid) {
 
     Vivid.registerComponent({
         name: "admin/RouteManagerComponent",
-        component: require("./component/RouteManagerComponent/RouteManagerComponent.jsx")
+        component: require("./component/RouteManagerComponent/RouteManagerComponent.jsx").component(Vivid),
+        reducer: require("./component/RouteManagerComponent/RouteManagerComponent.jsx").reducer
     });
 
     Vivid.registerComponent({
@@ -19,7 +20,7 @@ module.exports.register = function(Vivid) {
 
     Vivid.registerComponent({
         name: "admin/RouteDescriptionComponent",
-        component: require("./component/RouteDescription/RouteDescriptionComponent.jsx")
+        component: require("./component/RouteDescription/RouteDescriptionComponent.jsx")(Vivid)
     });
 
 };
@@ -53,14 +54,6 @@ module.exports.addRoutes = function(Vivid) {
                 },
                 {
                     name: "admin/RouteManagerComponent",
-                    type: "component"
-                },
-                {
-                    name: "admin/RouteManagerComponent",
-                    type: "component"
-                },
-                {
-                    name: "admin/RouteDescriptionComponent",
                     type: "component"
                 }
             ]

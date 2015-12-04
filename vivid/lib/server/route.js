@@ -3,7 +3,7 @@ var Redux = require('redux');
 var Provider = require('react-redux').Provider;
 var ReactDOMServer = require('react-dom/server');
 var _ = require('underscore');
-var adminEco = require('../../admin/index');
+var adminEco = require('../../admin/admin');
 
 module.exports.route = function(route) {
 
@@ -33,6 +33,8 @@ module.exports.route = function(route) {
         });
 
         initialState.pages[req.url] = _.extend({}, route, _this.resolveData(route));
+
+        initialState.currentPage = initialState.pages[initialState.currentUrl];
 
         var layout =_this.layouts[route.layout];
 

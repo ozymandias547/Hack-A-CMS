@@ -14,7 +14,7 @@ module.exports.start = function() {
         });
     }
 
-    var adminEco = require('../../admin/index');
+    var adminEco = require('../../admin/admin');
 
     adminEco.register(this);
     adminEco.addRoutes(this);

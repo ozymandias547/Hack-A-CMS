@@ -16,10 +16,12 @@ _.extend(Vivid.prototype,
     require("./lib/layout"),
     require("./lib/resolver"),
     require("./lib/browser/route"),
-    require("./lib/browser/start")
+    require("./lib/browser/start"),
+    require("./lib/browser/setup")
 );
 
 var vividSingleton = new Vivid();
 
+window.Vivid = vividSingleton;
 
 module.exports = vividSingleton;
