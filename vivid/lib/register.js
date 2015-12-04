@@ -1,3 +1,5 @@
+var uuid = require('uuid');
+
 module.exports.registerLayout = function(layout) {
 	this.layouts[layout.name] = layout;
 };

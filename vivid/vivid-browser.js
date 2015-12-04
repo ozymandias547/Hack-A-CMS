@@ -15,9 +15,9 @@ _.extend(Vivid.prototype,
     require("./lib/register"),
     require("./lib/layout"),
     require("./lib/resolver"),
+    require("./lib/browser/reducer"),
     require("./lib/browser/route"),
-    require("./lib/browser/start"),
-    require("./lib/browser/setup")
+    require("./lib/browser/start")
 );
 
 var vividSingleton = new Vivid();

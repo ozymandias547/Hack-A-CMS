@@ -2,6 +2,16 @@ var React = require('react');
 var _ = require('underscore');
 var deepcopy = require('deepcopy');
 
+// TODO: Add way to initialize the component scope variable
+// TODO: Add way to dispatch to all components instead of just this one.
+
+
+module.exports.contract = function() {
+    // Receive data XYZ.  This data comes in on the props (from the resolver)
+    // Can receive data from XYZ... perhaps some other component can change this component.
+};
+
+
 module.exports.component = function(Vivid) {
 
     var RouteManagerComponent = React.createClass({
@@ -19,19 +29,19 @@ module.exports.component = function(Vivid) {
                 <div>
                     <h4>Route Manager Component:</h4>
                     <button onClick={this.onAddRouteClick}>Add Route</button>
-                    { this.props.pages[this.props.currentUrl].routes.map(routeItem)}
-                    { this.props.currentPage.isLoadingRoute ? <LoadingLabel /> : null }
+
+                    { this.props.componentState.isLoadingRoute ? <LoadingLabel /> : null }
                 </div>
             );
         },
 
         onAddRouteClick: function(e) {
 
-            this.props.dispatch({ type: "LOADING_NEW_ROUTE" });
+            this.props.dispatch({ type: "LOADING_NEW_ROUTE", component: this.props.component, sendToAllComponentsOfThistype: false });
 
-            setTimeout(function() {
-                this.props.dispatch({ type: "NEW_ROUTE_LOADED" })
-            }.bind(this), 200);
+            //setTimeout(function() {
+            //    this.props.dispatch({ type: "NEW_ROUTE_LOADED" })
+            //}.bind(this), 200);
 
         }
 
@@ -41,20 +51,27 @@ module.exports.component = function(Vivid) {
 
 };
 
-module.exports.reducer = function(state, action) {
 
-    switch(action.type) {
-        case "LOADING_NEW_ROUTE":
+// Rename state to "componentState"
+module.exports.reducer = function() {
 
-            state.currentPage.isLoadingRoute = true;
-            break;
-        case "NEW_ROUTE_LOADED":
-            state.currentPage.isLoadingRoute = false;
-            state.pages[state.currentUrl].routes.push({ name: "A NEW ROUTE", text: "HOLY COW"});
+    return function(state, action) {
+        switch(action.type) {
+            case "LOADING_NEW_ROUTE":
+                state.isLoadingRoute = true;
+                break;
+            case "NEW_ROUTE_LOADED":
+                state.isLoadingRoute = false;
+                state.routes = [{ name: "A NEW ROUTE", text: "HOLY COW"}];
+                break;
+        }
 
-            break;
+        return state;
     }
 
-    return state;
+
+    // Only can change this components state, and any store that it sets up.
+
+
 
 };

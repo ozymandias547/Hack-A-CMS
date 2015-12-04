@@ -36,6 +36,20 @@ module.exports.route = function(route) {
 
         initialState.currentPage = initialState.pages[initialState.currentUrl];
 
+        for (var i in initialState.pages) {
+            var page = initialState.pages[i];
+
+            page.components = {};
+
+            for (var j in page.pageLayout) {
+                var content = page.pageLayout[j];
+
+                content.forEach(function (part) {
+                    page.components[part.uuid] = {};
+                }.bind(this))
+            }
+        }
+
         var layout =_this.layouts[route.layout];
 
         var store = configureStore(initialState);

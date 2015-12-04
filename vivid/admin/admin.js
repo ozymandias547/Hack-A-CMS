@@ -1,4 +1,5 @@
 var React = require('react');
+var uuid = require('uuid');
 
 module.exports.register = function(Vivid) {
 
@@ -46,15 +47,23 @@ module.exports.addRoutes = function(Vivid) {
             content1: [
                 {
                     name: "admin/AdminNavComponent",
-                    type: "component"
+                    type: "component",
+                    uuid: uuid.v4()
                 },
                 {
                     name: "welcomeArticle",
-                    type: "article"
+                    type: "article",
+                    uuid: uuid.v4()
                 },
                 {
                     name: "admin/RouteManagerComponent",
-                    type: "component"
+                    type: "component",
+                    uuid: uuid.v4()
+                },
+                {
+                    name: "admin/RouteManagerComponent",
+                    type: "component",
+                    uuid: uuid.v4()
                 }
             ]
         }
@@ -73,15 +82,18 @@ module.exports.addRoutes = function(Vivid) {
             content1: [
                 {
                     name: "admin/AdminNavComponent",
-                    type: "component"
+                    type: "component",
+                    uuid: uuid.v4()
                 },
                 {
                     name: "configArticle",
-                    type: "article"
+                    type: "article",
+                    uuid: uuid.v4()
                 },
                 {
                     name: "admin/RouteDescriptionComponent",
-                    type: "component"
+                    type: "component",
+                    uuid: uuid.v4()
                 }
             ]
         }
@@ -100,11 +112,13 @@ module.exports.addRoutes = function(Vivid) {
             content1: [
                 {
                     name: "admin/AdminNavComponent",
-                    type: "component"
+                    type: "component",
+                    uuid: uuid.v4()
                 },
                 {
                     name: "admin/RouteDescriptionComponent",
-                    type: "component"
+                    type: "component",
+                    uuid: uuid.v4()
                 }
             ]
         }

@@ -15,6 +15,7 @@ module.exports.createBlockContent = function(name, props) {
                 if (part.type === "article") {
                     content.push(React.createElement("div", {
                         className: "article " + part.name,
+                        key: part.uuid,
                         dangerouslySetInnerHTML: {
                             __html: currentPageData[part.name]
                         },
@@ -22,10 +23,11 @@ module.exports.createBlockContent = function(name, props) {
                     }));
                 }
 
-                if (part.type === "component") {
+                    if (part.type === "component") {
                     var Component = _.findWhere(_this.components, {name: part.name});
+
                     content.push(React.createElement(
-                        Component.component, props
+                        Component.component, { componentState: currentPageData.components[part.uuid], key: part.uuid, dispatch: props.dispatch, component: part.uuid, page: props.pages[props.currentUrl] }
                     ));
 
                 }
