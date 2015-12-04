@@ -60,9 +60,9 @@ module.exports._startStore = function() {
 
     // Setup up root, page, and component reducers
     this._setInitialState(initialAppState);
-    this.appStore = Redux.createStore(this._rootReducer);
     this._addReducer(this._pageReducer);
     this._addHardCodedComponentReducers();
+    this.appStore = Redux.createStore(this._rootReducer);
 
 };
 

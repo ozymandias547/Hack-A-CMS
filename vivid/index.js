@@ -12,6 +12,7 @@ var Vivid = function() {
     this.options = {};
     this.layouts = {};
     this.components = {};
+    this.routes = {};
     this.express = express();
     this.port = 8080;
     this.mode = "dev";
@@ -23,6 +24,7 @@ _.extend(Vivid.prototype,
     require("./lib/register"),
     require("./lib/layout"),
     require("./lib/resolver"),
+    require("./lib/browser/reducer"),
     require("./lib/server/route")
 );
 

@@ -29,7 +29,7 @@ module.exports.component = function(Vivid) {
                 <div>
                     <h4>Route Manager Component:</h4>
                     <button onClick={this.onAddRouteClick}>Add Route</button>
-
+                    { this.props.componentState.routes.map(routeItem)}
                     { this.props.componentState.isLoadingRoute ? <LoadingLabel /> : null }
                 </div>
             );
@@ -39,9 +39,9 @@ module.exports.component = function(Vivid) {
 
             this.props.dispatch({ type: "LOADING_NEW_ROUTE", component: this.props.component, sendToAllComponentsOfThistype: false });
 
-            //setTimeout(function() {
-            //    this.props.dispatch({ type: "NEW_ROUTE_LOADED" })
-            //}.bind(this), 200);
+            setTimeout(function() {
+                this.props.dispatch({ type: "NEW_ROUTE_LOADED", component: this.props.component, sendToAllComponentsOfThistype: false })
+            }.bind(this), 200);
 
         }
 
@@ -57,17 +57,21 @@ module.exports.reducer = function() {
 
     return function(state, action) {
         switch(action.type) {
+            case "@@redux/INIT":
+                state.isLoadingRoute = false;
+                state.routes = [{ name: "A NEW ROUTE", text: "HOLY COW"}];
+                break;
             case "LOADING_NEW_ROUTE":
                 state.isLoadingRoute = true;
                 break;
             case "NEW_ROUTE_LOADED":
                 state.isLoadingRoute = false;
-                state.routes = [{ name: "A NEW ROUTE", text: "HOLY COW"}];
+                state.routes.push({ name: "A NEW ROUTE", text: "HOLY COW"});
                 break;
         }
 
         return state;
-    }
+    };
 
 
     // Only can change this components state, and any store that it sets up.

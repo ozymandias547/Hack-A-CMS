@@ -64,6 +64,16 @@ module.exports.addRoutes = function(Vivid) {
                     name: "admin/RouteManagerComponent",
                     type: "component",
                     uuid: uuid.v4()
+                },
+                {
+                    name: "admin/RouteManagerComponent",
+                    type: "component",
+                    uuid: uuid.v4()
+                },
+                {
+                    name: "admin/RouteManagerComponent",
+                    type: "component",
+                    uuid: uuid.v4()
                 }
             ]
         }

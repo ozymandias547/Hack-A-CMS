@@ -5,10 +5,20 @@ var reducers = [];
 var componentReducers = [];
 var initialState = {};
 
-module.exports._addHardCodedComponentReducers = function() {
+module.exports._addHardCodedComponentReducers = function(initialState) {
 
-    for (var i in this.appStore.getState().pages) {
-        var page = this.appStore.getState().pages[i]
+    // TODO: (critical) Find how to get the component reducer data on the server.
+
+    var payload;
+
+    if (typeof window !== "undefined") {
+        payload = window.__PAYLOAD__;
+    } else {
+        payload = initialState;
+    }
+
+    for (var i in payload.pages) {
+        var page = payload.pages[i]
 
         for (var j in page.pageLayout) {
             var content = page.pageLayout[j];
@@ -52,6 +62,8 @@ module.exports._rootReducer = function(state, action) {
 
     componentReducers.forEach(function(reducer) {
 
+        // TODO: Refactor for clarity
+
         var componentScope = newState.pages[newState.currentUrl].components[reducer.uuid];
 
         if (action.sendToAllComponentsOfThistype) {
@@ -60,6 +72,10 @@ module.exports._rootReducer = function(state, action) {
         else if (reducer.uuid === action.component) {
             if (componentScope) {
                 newState = _.extend(newState, reducer.reducer( componentScope, action ))
+            }
+        } else if (action.type === "@@redux/INIT") {
+            if (componentScope) {
+                newState = _.extend(newState, reducer.reducer(componentScope, action));
             }
         }
 
@@ -79,7 +95,6 @@ module.exports._pageReducer = function(state, action) {
 
         case "changePage":
             state.currentUrl = action.currentUrl;
-            state.currentPage = state.pages[action.currentUrl];
             if (action.pageData) {
                 state.pages[action.currentUrl] = _.extend({}, state.pages[action.currentUrl], action.pageData);
             }

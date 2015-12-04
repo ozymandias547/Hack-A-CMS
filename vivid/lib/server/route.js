@@ -8,6 +8,7 @@ var adminEco = require('../../admin/admin');
 module.exports.route = function(route) {
 
     var _this = this;
+    this.routes[route.name] = route;
 
     this.express.get(route.url, function(req, res) {
 
@@ -32,6 +33,13 @@ module.exports.route = function(route) {
             pages: {}
         });
 
+        // Build initial state of all known routes (hardcoded routes should be minimal, and most should come from the server)
+        for (var i in _this.routes) {
+            if (!initialState.pages[_this.routes[i].url]) {
+                initialState.pages[_this.routes[i].url] = _this.routes[i];
+            }
+        };
+
         initialState.pages[req.url] = _.extend({}, route, _this.resolveData(route));
 
         initialState.currentPage = initialState.pages[initialState.currentUrl];
@@ -52,12 +60,19 @@ module.exports.route = function(route) {
 
         var layout =_this.layouts[route.layout];
 
-        var store = configureStore(initialState);
-        var payload = store.getState();
+        //var store = configureStore(initialState);
+
+
+        _this._setInitialState(initialState);
+        _this._addReducer(_this._pageReducer);
+        _this._addHardCodedComponentReducers(initialState);
+        _this.appStore = Redux.createStore(_this._rootReducer);
+
+        var payload = _this.appStore.getState();
 
         var appHtml = ReactDOMServer.renderToString(React.createElement(
             Provider,
-            { store: store },
+            { store: _this.appStore },
             React.createElement(layout.component, payload)
         ));
 
