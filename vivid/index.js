@@ -3,6 +3,7 @@ var utils = require('./lib/vivid-utils');
 var request = require('request');
 var Promise = require('bluebird');
 var express = require('express');
+var path = require('path');
 
 require("babel-register")({retainLines: true});
 

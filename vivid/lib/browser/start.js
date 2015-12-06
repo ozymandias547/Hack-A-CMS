@@ -75,7 +75,7 @@ module.exports._startDOM = function() {
     ReactDOM.render(React.createElement(
         Provider,
         { store: this.appStore },
-        React.createElement(this.layouts[initialAppState.pages[initialAppState.currentUrl].layout].component)
+        React.createElement(require('../App.jsx')(this))
     ), document.getElementById("ROOT_CONTAINER"));
 
 };

@@ -6,6 +6,7 @@
   "author": "Joseph Jung",
   "license": "ISC",
   "dependencies": {
+    "extract-text-webpack-plugin": "^0.9.1",
     "glob": "5.0.14",
     "grunt": "0.4.5",
     "grunt-contrib-clean": "0.6.0",
@@ -20,8 +21,10 @@
     "load-grunt-tasks": "3.2.0",
     "lodash": "3.10.1",
     "matchdep": "0.3.0",
+    "node-sass": "^3.4.2",
+    "sass-loader": "^3.1.2",
     "underscore": "^1.8.3",
-    "webpack": "1.12.2",
+    "webpack": "1.12.6",
     "webpack-dev-server": "1.11.0"
   },
   "devDependencies": {
@@ -29,8 +32,6 @@
     "babel-loader": "^6.2.0",
     "babel-preset-react": "^6.1.18",
     "css-loader": "^0.22.0",
-    "node-sass": "^3.4.1",
-    "sass-loader": "^3.1.1",
     "style-loader": "0.13.0"
   }
 }

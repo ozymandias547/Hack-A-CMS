@@ -2,8 +2,9 @@ var React = require('react');
 var _ = require('underscore');
 var deepcopy = require('deepcopy');
 
-// TODO: Add way to initialize the component scope variable
-// TODO: Add way to dispatch to all components instead of just this one.
+if (typeof window !== "undefined") {
+    require('./RouteManagerComponent.scss');
+}
 
 
 module.exports.contract = function() {
@@ -12,37 +13,62 @@ module.exports.contract = function() {
 };
 
 
-module.exports.component = function(Vivid) {
+module.exports.component = function() {
 
     var RouteManagerComponent = React.createClass({
+
+        componentDidMount: function() {
+            document.querySelector(".RouteManagerComponent").style.height = window.innerHeight - document.querySelector(".RouteManagerComponent").getClientRects()[0].top
+        },
+
         render: function() {
 
             var routeItem = function(route) {
-                return <div>{route.name}</div>;
-            };
-
-            var LoadingLabel = function() {
-                return <div>Adding route...</div>;
+                if (route.isVisible) {
+                    return (
+                        <div className="routeItemContainer">
+                            {route.name}
+                        </div>
+                    );
+                } else {
+                    return null;
+                }
             };
 
             return (
-                <div>
+                <div className="RouteManagerComponent">
                     <h4>Route Manager Component:</h4>
-                    <button onClick={this.onAddRouteClick}>Add Route</button>
-                    { this.props.componentState.routes.map(routeItem)}
-                    { this.props.componentState.isLoadingRoute ? <LoadingLabel /> : null }
+                    <input type="text" placeholder="Route Name" ref="routeName" onKeyDown={this.onKeyDown}></input>
+                    { this.props.component.routes.map(routeItem)}
+                    { this.props.component.isLoadingRoute ? <div>Adding route...</div> : null }
                 </div>
             );
         },
 
-        onAddRouteClick: function(e) {
+        onKeyDown: function(e) {
+            if (e.which === 13) {
 
-            this.props.dispatch({ type: "LOADING_NEW_ROUTE", component: this.props.component, sendToAllComponentsOfThistype: false });
+                var newRouteName = this.refs.routeName.value;
 
-            setTimeout(function() {
-                this.props.dispatch({ type: "NEW_ROUTE_LOADED", component: this.props.component, sendToAllComponentsOfThistype: false })
-            }.bind(this), 200);
+                this.props.dispatch({
+                        type: "LOADING_NEW_ROUTE",
+                        componentId: this.props.componentId,
+                        sendToAllComponentsOfThistype: false}
+                );
 
+                this.refs.routeName.value = "";
+
+                setTimeout(function() {
+
+                    this.props.dispatch({
+                        type: "NEW_ROUTE_LOADED",
+                        componentId: this.props.componentId,
+                        sendToAllComponentsOfThistype: false,
+                        routeName: newRouteName
+                    })
+
+                }.bind(this), 200);
+            }
         }
 
     });
@@ -51,31 +77,36 @@ module.exports.component = function(Vivid) {
 
 };
 
-
-// Rename state to "componentState"
+/*
+ * Reducer only has access to this components state.  it can listen to all events going through the system though.
+ */
 module.exports.reducer = function() {
 
     return function(state, action) {
         switch(action.type) {
             case "@@redux/INIT":
                 state.isLoadingRoute = false;
-                state.routes = [{ name: "A NEW ROUTE", text: "HOLY COW"}];
+                state.routes = [{ name: "Something", text: "HOLY COW", isVisible: true}, { name: "Another thing", text: "HOLY COW", isVisible: true}, { name: "Wowowo!", text: "HOLY COW", isVisible: true}];
                 break;
             case "LOADING_NEW_ROUTE":
                 state.isLoadingRoute = true;
                 break;
             case "NEW_ROUTE_LOADED":
                 state.isLoadingRoute = false;
-                state.routes.push({ name: "A NEW ROUTE", text: "HOLY COW"});
+                state.routes.push({ name: action.routeName, text: "HOLY COW", isVisible: true});
+                break;
+            case "FILTER_ROUTES":
+                state.routes.forEach(function(route) {
+                    if (route.name.indexOf(action.filterByString) !== -1) {
+                        route.isVisible = true;
+                    } else {
+                        route.isVisible = false;
+                    }
+                });
                 break;
         }
 
         return state;
     };
-
-
-    // Only can change this components state, and any store that it sets up.
-
-
 
 };

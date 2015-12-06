@@ -12,7 +12,7 @@ module.exports = function(Vivid) {
 
             // Build components array that will go into the blocks of the layout.
             this.blocks = {
-                content1 : Vivid.createBlockContent("content1", this.props)
+                content1 : Vivid.createBlockContent("content1", this.props.page)
             };
 
             function createPayload() {
@@ -38,7 +38,7 @@ module.exports = function(Vivid) {
     }
 
 
-    return ReactRedux.connect(mapStateToProps, null)(LayoutOneColumn);
+    return LayoutOneColumn;
 
 };
 

@@ -73,17 +73,18 @@ module.exports.route = function(route) {
         var appHtml = ReactDOMServer.renderToString(React.createElement(
             Provider,
             { store: _this.appStore },
-            React.createElement(layout.component, payload)
+            React.createElement(require('../App.jsx')(_this), payload)
         ));
 
         res.send(
             "<html>" +
             "<head>" +
+                "<link rel='stylesheet' type='text/css' href='http://localhost:8882/vividapp.css'></link>" +
                 "<script>var __PAYLOAD__ = " + JSON.stringify(payload) + "</script>" +
-                "<script src='http://localhost:8882/app1/bundle.js'></script>" +
             "</head>" +
             "<body>" +
                 "<div id='ROOT_CONTAINER'>" + appHtml + "</div>" +
+                "<script src='http://localhost:8882/vividapp/bundle.js'></script>" +
             "</body>"
 
         );

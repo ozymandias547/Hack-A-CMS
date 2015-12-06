@@ -27,7 +27,7 @@ module.exports.createBlockContent = function(name, props) {
                     var Component = _.findWhere(_this.components, {name: part.name});
 
                     content.push(React.createElement(
-                        Component.component, { componentState: currentPageData.components[part.uuid], key: part.uuid, dispatch: props.dispatch, component: part.uuid, page: props.pages[props.currentUrl] }
+                        Component.component, { component: currentPageData.components[part.uuid], key: part.uuid, dispatch: props.dispatch, componentId: part.uuid, page: props.pages[props.currentUrl], currentUrl: props.currentUrl }
                     ));
 
                 }

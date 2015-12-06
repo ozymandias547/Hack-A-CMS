@@ -1,14 +1,31 @@
 var React = require('react');
 
+if (typeof window !== "undefined") {
+    require('./AdminNavComponent.scss');
+}
+
 module.exports = function(Vivid) {
 
     var AdminNavComponent = React.createClass({
         render: function() {
+
             return (
                 <div className="component AdminNavComponent">
-                    <a href="/" onClick={this.handleClick}>Route Manager</a>
-                    <a href="/config" onClick={this.handleClick}>Config</a>
-                    <a href="/users" onClick={this.handleClick}>Users</a>
+                    <div className={ this.props.currentUrl === "/" ? "active" : "" }>
+                        <a href="/" onClick={this.handleClick} >
+                            Route Manager
+                        </a>
+                    </div>
+                    <div className={ this.props.currentUrl === "/config" ? "active" : "" }>
+                        <a href="/config" onClick={this.handleClick}>
+                            Config
+                        </a>
+                    </div>
+                    <div className={ this.props.currentUrl === "/users" ? "active" : "" }>
+                        <a href="/users" onClick={this.handleClick}>
+                            Users
+                        </a>
+                    </div>
                 </div>
             );
         },

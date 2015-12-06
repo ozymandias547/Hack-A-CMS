@@ -1,0 +1,20 @@
+.AdminNavComponent {
+  background: #FFA955;
+  height: 100000px;
+
+  a {
+    font-size: 14px;
+    display: block;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-bottom: 1px solid #fff;
+    color: white;
+  }
+
+  .active {
+    a {
+      color: black;
+    }
+  }
+
+}

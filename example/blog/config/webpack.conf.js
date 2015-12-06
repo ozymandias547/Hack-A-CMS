@@ -3,11 +3,13 @@
 var	webpack = require('webpack');
 var	gruntConfig = require('./grunt.conf.js');
 var path = require('path');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+
 
 module.exports = {
     context: gruntConfig.srcPath,
     entry: {
-		app1: gruntConfig.browserEntry
+		vividapp: gruntConfig.browserEntry
 	},
 	output: {
 		path: gruntConfig.assets,
@@ -27,7 +29,8 @@ module.exports = {
 		loaders: [
             {
                 test: /\.scss$/,
-                loaders: ["style", "css", "sass"]
+                loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader")
+                    //["style", "css", "sass"]
             },
             {
                 test: /\.jsx$/,
@@ -38,6 +41,9 @@ module.exports = {
                 }
             }
 		]
-	}
+	},
+    plugins: [
+        new ExtractTextPlugin("[name].css")
+    ]
 };
 

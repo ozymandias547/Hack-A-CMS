@@ -31,9 +31,7 @@ module.exports._addHardCodedComponentReducers = function(initialState) {
                     var Component = _.findWhere(this.components, {name: part.name});
 
                     if (Component.reducer) {
-                        console.log("add reducer");
                         componentReducers.push({ reducer: Component.reducer(), uuid: part.uuid});
-
                     }
 
                 }
@@ -64,19 +62,39 @@ module.exports._rootReducer = function(state, action) {
 
         // TODO: Refactor for clarity
 
-        var componentScope = newState.pages[newState.currentUrl].components[reducer.uuid];
+        if (action.type === "@@redux/INIT") {
 
-        if (action.sendToAllComponentsOfThistype) {
-            newState = _.extend(newState, reducer.reducer( componentScope, action ))
-        }
-        else if (reducer.uuid === action.component) {
-            if (componentScope) {
-                newState = _.extend(newState, reducer.reducer( componentScope, action ))
+            // Loop through each component scope and run init on them.
+
+            for (var i in  newState.pages) {
+                var page = newState.pages[i];
+
+                for (var j in page.components) {
+                    var component = page.components[j];
+
+                    if (reducer.uuid === j) {
+                        newState = _.extend(newState, reducer.reducer(component, action));
+                    }
+                }
             }
-        } else if (action.type === "@@redux/INIT") {
+
+        } else {
+
+            var componentScope = newState.pages[newState.currentUrl].components[reducer.uuid];
+
             if (componentScope) {
-                newState = _.extend(newState, reducer.reducer(componentScope, action));
+
+                if (action.sendToAllComponentsOnPage) {
+                    newState = _.extend(newState, reducer.reducer(componentScope, action))
+                }
+                else if (action.sendToAllComponentsOfThistype) {
+                    newState = _.extend(newState, reducer.reducer(componentScope, action))
+                }
+                else if (reducer.uuid === action.componentId) {
+                    newState = _.extend(newState, reducer.reducer(componentScope, action))
+                }
             }
+
         }
 
     });

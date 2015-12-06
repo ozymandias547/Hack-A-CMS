@@ -1,0 +1,25 @@
+.TopBarComponent {
+
+  background: #FFA955;
+
+  .title {
+    color: white;
+    font-size: 20px;
+    display: inline-block;
+    padding: 10px 10px 10px 10px;
+  }
+
+  .searchbar {
+    display: inline-block;
+    font-size: 13px;
+    padding: 8px;
+    vertical-align: top;
+    margin: 5px 10px 5px 0;
+    border: 1px solid black;
+  }
+
+  .searchbar:focus {
+    outline: none;
+  }
+
+}
