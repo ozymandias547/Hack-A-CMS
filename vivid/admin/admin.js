@@ -13,6 +13,8 @@ module.exports.register = function(Vivid) {
         component: require("./layout/LayoutTopBarRightMenu/LayoutTopBarRightMenu.jsx")(Vivid)
     });
 
+
+    // TODO: Clean up the interface for adding a new component.
     Vivid.registerComponent({
         name: "admin/RouteManagerComponent",
         component: require("./component/RouteManagerComponent/RouteManagerComponent.jsx").component(Vivid),
@@ -45,13 +47,7 @@ module.exports.addRoutes = function(Vivid) {
         layout: "admin/LayoutTopBarRightMenu",
         resolve: [
             {
-                name: "welcomePageMeta"
-            },
-            {
-                name: "welcomeArticle"
-            },
-            {
-                name: "routes"
+                datasource: "core/routes"
             }
         ],
         pageLayout: {

@@ -6,10 +6,13 @@ if (typeof window !== "undefined") {
     require('./RouteManagerComponent.scss');
 }
 
-
+/*
+ * The data that this component needs to function. It uses the 'datasource' name.
+ */
 module.exports.contract = function() {
-    // Receive data XYZ.  This data comes in on the props (from the resolver)
-    // Can receive data from XYZ... perhaps some other component can change this component.
+    return {
+        routes: "core/routes"
+    }
 };
 
 
@@ -17,11 +20,9 @@ module.exports.component = function() {
 
     var RouteManagerComponent = React.createClass({
 
-        componentDidMount: function() {
-            document.querySelector(".RouteManagerComponent").style.height = window.innerHeight - document.querySelector(".RouteManagerComponent").getClientRects()[0].top
-        },
-
         render: function() {
+
+            var AddRouteWizard = require('./AddRouteWizard/AddRouteWizard.jsx');
 
             var routeItem = function(route) {
                 if (route.isVisible) {
@@ -35,39 +36,42 @@ module.exports.component = function() {
                 }
             };
 
+            var addRouteWizard = null;
+
+            if (this.props.component.isAddRouteWizardOpen) {
+                addRouteWizard = <AddRouteWizard wizardValues={this.props.component.wizardValues} dispatch={this.props.dispatch} componentId={this.props.componentId}/>;
+            }
+
             return (
                 <div className="RouteManagerComponent">
-                    <h4>Route Manager Component:</h4>
-                    <input type="text" placeholder="Route Name" ref="routeName" onKeyDown={this.onKeyDown}></input>
-                    { this.props.component.routes.map(routeItem)}
-                    { this.props.component.isLoadingRoute ? <div>Adding route...</div> : null }
+                    <div className="toolbar">
+                        <a href="" onClick={this.onAddRouteClick}>Add route...</a>
+                    </div>
+                    {addRouteWizard}
+                    <div className="routes-container">
+                        { this.props.component.routes.map(routeItem)}
+                    </div>
                 </div>
             );
         },
-
+        onAddRouteClick: function(e) {
+            e.preventDefault();
+            this.props.dispatch({type: "NEWROUTEWIZARD_VISIBILITY", isAddRouteWizardOpen: true, componentId: this.props.componentId})
+        },
         onKeyDown: function(e) {
             if (e.which === 13) {
 
                 var newRouteName = this.refs.routeName.value;
 
                 this.props.dispatch({
-                        type: "LOADING_NEW_ROUTE",
-                        componentId: this.props.componentId,
-                        sendToAllComponentsOfThistype: false}
-                );
+                    type: "NEW_ROUTE_LOADED",
+                    componentId: this.props.componentId,
+                    sendToAllComponentsOfThistype: false,
+                    routeName: newRouteName
+                });
 
                 this.refs.routeName.value = "";
 
-                setTimeout(function() {
-
-                    this.props.dispatch({
-                        type: "NEW_ROUTE_LOADED",
-                        componentId: this.props.componentId,
-                        sendToAllComponentsOfThistype: false,
-                        routeName: newRouteName
-                    })
-
-                }.bind(this), 200);
             }
         }
 
@@ -84,16 +88,22 @@ module.exports.reducer = function() {
 
     return function(state, action) {
         switch(action.type) {
+
             case "@@redux/INIT":
+                state.wizardValues = {
+                    routeName: "Untitled",
+                    urls: []
+                };
                 state.isLoadingRoute = false;
+                state.isAddRouteWizardOpen = true;
                 state.routes = [{ name: "Something", text: "HOLY COW", isVisible: true}, { name: "Another thing", text: "HOLY COW", isVisible: true}, { name: "Wowowo!", text: "HOLY COW", isVisible: true}];
-                break;
-            case "LOADING_NEW_ROUTE":
-                state.isLoadingRoute = true;
                 break;
             case "NEW_ROUTE_LOADED":
                 state.isLoadingRoute = false;
                 state.routes.push({ name: action.routeName, text: "HOLY COW", isVisible: true});
+                break;
+            case "NEWROUTEWIZARD_VISIBILITY":
+                state.isAddRouteWizardOpen = action.isAddRouteWizardOpen;
                 break;
             case "FILTER_ROUTES":
                 state.routes.forEach(function(route) {

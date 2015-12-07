@@ -1,6 +1,14 @@
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+
+  font-size: 13px;
+}
+
 .RouteManagerComponent {
-  background: white;
   overflow-y: scroll;
+  padding: 0 10px;
 
   h4:first-child {
     margin-top: 0;
@@ -8,9 +16,21 @@
 
   .routeItemContainer {
     width: 100%;
-    /* padding: 5px; */
-    margin: 10px 0;
-    border: 1px dotted gray;
+    margin-bottom: 10px;
+    border: 1px solid #D4D4D4;
+    border-radius: 3px;
+    padding: 10px;
+    -webkit-box-shadow: -1px 4px 5px -5px rgba(0,0,0,0.37);
+    -moz-box-shadow: -1px 4px 5px -5px rgba(0,0,0,0.37);
+    box-shadow: -1px 4px 5px -5px rgba(0,0,0,0.37);
+  }
+  .routes-container {
+    padding: 0 0 10px 0;
+  }
+
+  .toolbar {
+    padding: 10px 0 10px 10px;
+    font-size: 12px;
   }
 
 }

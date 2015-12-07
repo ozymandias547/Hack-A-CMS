@@ -7,9 +7,8 @@ module.exports = function(Vivid) {
 
             return (
                 <div>
-                    <div>The title of this page is... <strong>{this.props.page.meta.title }</strong></div>
-                    <div>It is using the layout: <strong>{this.props.page.layout}</strong></div>
                     <div>The route name is: <strong>{this.props.page.name}</strong></div>
+                    <div>It is using the layout: <strong>{this.props.page.layout}</strong></div>
                 </div>
             );
         }

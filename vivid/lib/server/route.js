@@ -16,7 +16,6 @@ module.exports.route = function(route) {
             adminEco.register(_this);
         }
 
-
         // ---Middleware---
         // auth filter
         // redirect filter
@@ -38,12 +37,11 @@ module.exports.route = function(route) {
             if (!initialState.pages[_this.routes[i].url]) {
                 initialState.pages[_this.routes[i].url] = _this.routes[i];
             }
-        };
+        }
 
-        initialState.pages[req.url] = _.extend({}, route, _this.resolveData(route));
+        initialState.pages[req.url] = _.extend({}, route, { datasource: _this.resolveData(route)} );
 
-        initialState.currentPage = initialState.pages[initialState.currentUrl];
-
+        // Build initial component state
         for (var i in initialState.pages) {
             var page = initialState.pages[i];
 
@@ -57,10 +55,6 @@ module.exports.route = function(route) {
                 }.bind(this))
             }
         }
-
-        var layout =_this.layouts[route.layout];
-
-        //var store = configureStore(initialState);
 
 
         _this._setInitialState(initialState);
@@ -93,18 +87,3 @@ module.exports.route = function(route) {
 
 };
 
-function configureStore(initialState, action) {
-
-    return Redux.createStore(function(state, actionType) {
-
-        var state = state || initialState;
-
-        switch (actionType) {
-            default : return state;
-        }
-
-        return state;
-
-    });
-
-}

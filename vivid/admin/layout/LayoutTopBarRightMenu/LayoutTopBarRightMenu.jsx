@@ -12,23 +12,12 @@ module.exports = function(Vivid) {
 
         render: function() {
 
-            var _this = this;
-
             // Build components array that will go into the blocks of the layout.
             this.blocks = {
                 topBar : Vivid.createBlockContent("topBar", this.props),
                 rightMenu : Vivid.createBlockContent("rightMenu", this.props),
                 content : Vivid.createBlockContent("content", this.props)
             };
-
-            function createPayload() {
-
-                var payload = _.omit(_this.props, "appStore");
-
-                return {
-                    __html: 'window.__INITIAL_STATE=' + JSON.stringify(payload)
-                }
-            }
 
             return (
                 <div className="LayoutTopBarRightMenu pure-g">
@@ -38,6 +27,10 @@ module.exports = function(Vivid) {
                 </div>
             );
 
+        },
+        componentDidMount: function() {
+            document.querySelector(".RightBar").style.height = window.innerHeight - document.querySelector(".RightBar").getClientRects()[0].top
+            document.querySelector(".Content").style.height = window.innerHeight - document.querySelector(".Content").getClientRects()[0].top
         }
     });
 
