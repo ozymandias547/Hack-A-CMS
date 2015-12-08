@@ -1,3 +1,4 @@
+// TODO: Define and build out this method.
 module.exports.resolveData = function(route) {
 
     var resolvedData = {};
@@ -12,30 +13,5 @@ module.exports.resolveData = function(route) {
     }.bind(this));
 
     return resolvedData;
-
-    // Fulfills contracts that components have to receive data from a datasource.
-    //if (route.url === "/") {
-    //    return {
-    //        meta: {
-    //            title: "Vivid Routes"
-    //        }
-    //    };
-    //}
-    //
-    //if (route.url === "/config") {
-    //    return {
-    //        meta: {
-    //            title: "Vivid Configuration"
-    //        }
-    //    };
-    //}
-    //
-    //if (route.url === "/users") {
-    //    return {
-    //        meta: {
-    //            title: "Users"
-    //        }
-    //    };
-    //}
 
 };

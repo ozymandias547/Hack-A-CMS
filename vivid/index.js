@@ -1,5 +1,4 @@
 var _ = require('lodash');
-var utils = require('./lib/vivid-utils');
 var request = require('request');
 var Promise = require('bluebird');
 var express = require('express');

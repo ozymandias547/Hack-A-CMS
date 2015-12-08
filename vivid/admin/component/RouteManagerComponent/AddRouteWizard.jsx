@@ -1,9 +1,6 @@
 var React = require('react');
 var _ = require('underscore');
 
-if (typeof window !== "undefined") {
-    require('./AddRouteWizard.scss');
-}
 
 var AddRouteWizard = React.createClass({
     render: function() {
@@ -11,7 +8,7 @@ var AddRouteWizard = React.createClass({
         return (
             <div className="AddRouteWizard">
                 <div className="titlebar">
-                    <input type="text" placeholder="route name..." />
+                    <input type="text" placeholder="route name..." ref="routeNameInput"/>
                     <button className="add">Add</button>
                     <button className="cancel" onClick={this.onCancelClick}>Cancel</button>
                 </div>
@@ -42,6 +39,9 @@ var AddRouteWizard = React.createClass({
     },
     onCancelClick: function(e) {
         this.props.dispatch({type: "NEWROUTEWIZARD_VISIBILITY", isAddRouteWizardOpen: false, componentId: this.props.componentId})
+    },
+    componentDidMount: function(){
+        this.refs.routeNameInput.focus();
     }
 
 });

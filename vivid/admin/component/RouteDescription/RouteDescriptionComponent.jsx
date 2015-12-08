@@ -1,19 +1,16 @@
 var React = require('react');
 
-module.exports = function(Vivid) {
+module.exports.component = React.createClass({
 
-    var RouteManagerComponent = React.createClass({
-        render: function() {
+    render: function() {
 
-            return (
-                <div>
-                    <div>The route name is: <strong>{this.props.page.name}</strong></div>
-                    <div>It is using the layout: <strong>{this.props.page.layout}</strong></div>
-                </div>
-            );
-        }
-    });
+        return (
+            <div>
+                <div>The route name is: <strong>{this.props.page.name}</strong></div>
+                <div>It is using the layout: <strong>{this.props.page.layout}</strong></div>
+            </div>
+        );
+    }
 
-    return RouteManagerComponent;
+});
 
-};

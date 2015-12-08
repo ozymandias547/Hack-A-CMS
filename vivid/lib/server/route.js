@@ -33,11 +33,13 @@ module.exports.route = function(route) {
         });
 
         // Build initial state of all known routes (hardcoded routes should be minimal, and most should come from the server)
-        for (var i in _this.routes) {
-            if (!initialState.pages[_this.routes[i].url]) {
-                initialState.pages[_this.routes[i].url] = _this.routes[i];
-            }
-        }
+        //for (var i in _this.routes) {
+        //    if (!initialState.pages[_this.routes[i].url]) {
+        //        initialState.pages[_this.routes[i].url] = _this.routes[i];
+        //    }
+        //}
+
+        initialState.pages[route.url] = route;
 
         initialState.pages[req.url] = _.extend({}, route, { datasource: _this.resolveData(route)} );
 
@@ -51,7 +53,9 @@ module.exports.route = function(route) {
                 var content = page.pageLayout[j];
 
                 content.forEach(function (part) {
-                    page.components[part.uuid] = {};
+                    page.components[part.uuid] = {
+                        componentName: part.name
+                    };
                 }.bind(this))
             }
         }

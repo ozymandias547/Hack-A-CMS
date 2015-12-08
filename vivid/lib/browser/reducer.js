@@ -4,6 +4,7 @@ var _ = require('underscore');
 var reducers = [];
 var componentReducers = [];
 var initialState = {};
+var Vivid;
 
 module.exports._addHardCodedComponentReducers = function(initialState) {
 
@@ -28,10 +29,12 @@ module.exports._addHardCodedComponentReducers = function(initialState) {
                 if (part.type === "component") {
 
                     // instantiate a new reducer from the component
-                    var Component = _.findWhere(this.components, {name: part.name});
+                    //var Component = _.findWhere(this.components, {name: part.name});
+
+                    var Component = this.components[part.name];
 
                     if (Component.reducer) {
-                        componentReducers.push({ reducer: Component.reducer(), uuid: part.uuid});
+                        componentReducers.push({ reducer: Component.reducer, uuid: part.uuid});
                     }
 
                 }
@@ -70,10 +73,26 @@ module.exports._rootReducer = function(state, action) {
                 var page = newState.pages[i];
 
                 for (var j in page.components) {
-                    var component = page.components[j];
+                    var componentState = page.components[j];
 
                     if (reducer.uuid === j) {
-                        newState = _.extend(newState, reducer.reducer(component, action));
+
+                        var contract = Vivid.components[componentState.componentName].contract;
+
+                        if (contract) {
+
+                            componentState.data = {};
+
+                            for (var i in contract) {
+                                componentState.data[i] = page.datasource[contract[i]];
+
+                                newState = _.extend(newState, reducer.reducer(componentState, action));
+                            }
+                        } else {
+                            newState = _.extend(newState, reducer.reducer(componentState, action));
+                        }
+
+
                     }
                 }
             }
@@ -105,6 +124,7 @@ module.exports._rootReducer = function(state, action) {
 
 module.exports._setInitialState = function(_initialState) {
     initialState = _initialState;
+    Vivid = this;
 };
 
 module.exports._pageReducer = function(state, action) {

@@ -1,9 +1,11 @@
 .TopBarComponent {
 
-  background: #FFA955;
-  -webkit-box-shadow: -1px -15px 74px 25px rgba(255,255,255,1);
-  -moz-box-shadow: -1px -15px 74px 25px rgba(255,255,255,1);
-  box-shadow: -1px -15px 74px 25px rgba(255,255,255,1);
+  background-image: -webkit-linear-gradient(top, #FFB368, #FFA955);
+  background-image: -moz-linear-gradient(top, #FFB368, #FFA955);
+  background-image: -ms-linear-gradient(top, #FFB368, #FFA955);
+  background-image: -webkit-linear-gradient(top, #FFB368, #FFA955);
+  background-image: -o-linear-gradient(top, #FFB368, #FFA955);
+  background-image: linear-gradient(top, #FFB368, #FFA955);
 
   .title {
     color: white;

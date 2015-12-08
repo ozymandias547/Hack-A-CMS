@@ -1,6 +1,7 @@
 var React = require('react');
 var _ = require('underscore');
 
+//TODO: Define this method with comments
 module.exports.createBlockContent = function(name, props) {
 
     var content = [];
@@ -18,13 +19,12 @@ module.exports.createBlockContent = function(name, props) {
                         key: part.uuid,
                         dangerouslySetInnerHTML: {
                             __html: currentPageData[part.name]
-                        },
-                        key: currentPageData[part.name]
+                        }
                     }));
                 }
 
                     if (part.type === "component") {
-                    var Component = _.findWhere(_this.components, {name: part.name});
+                    var Component = _this.components[part.name];
 
                     content.push(React.createElement(
                         Component.component, { component: currentPageData.components[part.uuid], key: part.uuid, dispatch: props.dispatch, componentId: part.uuid, page: props.pages[props.currentUrl], currentUrl: props.currentUrl }

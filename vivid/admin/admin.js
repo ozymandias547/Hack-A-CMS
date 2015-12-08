@@ -1,6 +1,7 @@
 var React = require('react');
 var uuid = require('uuid');
 
+// TODO: Research ability to not need dependency injection for ecosystem files - better to just have a pre-bound (this)?
 module.exports.register = function(Vivid) {
 
     Vivid.registerLayout({
@@ -13,28 +14,24 @@ module.exports.register = function(Vivid) {
         component: require("./layout/LayoutTopBarRightMenu/LayoutTopBarRightMenu.jsx")(Vivid)
     });
 
-
-    // TODO: Clean up the interface for adding a new component.
     Vivid.registerComponent({
         name: "admin/RouteManagerComponent",
-        component: require("./component/RouteManagerComponent/RouteManagerComponent.jsx").component(Vivid),
-        reducer: require("./component/RouteManagerComponent/RouteManagerComponent.jsx").reducer
+        component: require("./component/RouteManagerComponent/RouteManagerComponent.jsx")
     });
 
     Vivid.registerComponent({
         name: "admin/AdminNavComponent",
-        component: require("./component/AdminNavComponent/AdminNavComponent.jsx")(Vivid)
+        component: require("./component/AdminNavComponent/AdminNavComponent.jsx")
     });
 
     Vivid.registerComponent({
         name: "admin/RouteDescriptionComponent",
-        component: require("./component/RouteDescription/RouteDescriptionComponent.jsx")(Vivid)
+        component: require("./component/RouteDescription/RouteDescriptionComponent.jsx")
     });
 
     Vivid.registerComponent({
         name: "admin/TopBar",
-        component: require("./component/TopBar/TopBarComponent.jsx").component(Vivid),
-        reducer: require("./component/TopBar/TopBarComponent.jsx").reducer
+        component: require("./component/TopBar/TopBarComponent.jsx")
     });
 
 };
@@ -56,6 +53,7 @@ module.exports.addRoutes = function(Vivid) {
                 {
                     name: "admin/TopBar",
                     type: "component",
+                    //TODO: make uuid creation part of the framework, not part of the API
                     uuid: uuid.v4()
                 }
             ],

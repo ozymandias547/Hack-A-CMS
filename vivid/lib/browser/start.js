@@ -33,30 +33,9 @@ module.exports._startStore = function() {
 
     var initialAppState = _.extend({
         currentUrl: payload.currentUrl,
-        currentPage: payload.pages[payload.currentUrl],
         pages: payload.pages
     });
 
-    // Build initial state of all known routes (hardcoded routes should be minimal, and most should come from the server)
-    for (var i in this.routes) {
-        if (!initialAppState.pages[this.routes[i].url]) {
-            initialAppState.pages[this.routes[i].url] = this.routes[i];
-        }
-    };
-
-    for (var i in initialAppState.pages) {
-        var page = initialAppState.pages[i];
-
-        page.components = {};
-
-        for (var j in page.pageLayout) {
-            var content = page.pageLayout[j];
-
-            content.forEach(function (part) {
-                page.components[part.uuid] = {};
-            }.bind(this))
-        }
-    }
 
     // Setup up root, page, and component reducers
     this._setInitialState(initialAppState);
@@ -69,8 +48,6 @@ module.exports._startStore = function() {
 module.exports._startDOM = function() {
 
     this.router.init();
-
-    var initialAppState = this.appStore.getState();
 
     ReactDOM.render(React.createElement(
         Provider,
