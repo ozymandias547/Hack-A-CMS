@@ -9,48 +9,15 @@ var clone = require('clone');
 
 module.exports.route = function(route) {
 
-    var _this = this;
     this.routes[route.name] = route;
-
-    // Assign uuids to each component instance
-    //for (var i in this.routes) {
-    //    var thisRoute = this.routes[i];
-    //
-    //    thisRoute.urls.forEach(function(url) {
-    //        for (var j in thisRoute.pageLayout) {
-    //            var thisLayoutSection = thisRoute.pageLayout[j];
-    //            thisLayoutSection.forEach(function(layoutSection) {
-    //                layoutSection.uuid = uuid.v4();
-    //            });
-    //        }
-    //    })
-    //
-    //
-    //}
 
     // Bind routes
     route.urls.forEach(function(url) {
+        this.express.get(url, function(req, res) {
 
-        var _this = this;
-
-        _this.express.get(url, function(req, res) {
-
-            if (_this.mode === "dev") {
-                adminEco.register(_this);
+            if (this.mode === "dev") {
+                adminEco.register(this);
             }
-
-
-
-            // ---Middleware---
-            // auth filter
-            // redirect filter
-            // data gather
-
-            // ---Render process---
-            // create App HTML element
-            // setup Redux Store
-            // renderStore state
-            // render App HTML element with payload
 
             var initialState = _.extend({
                 currentUrl: req.url,
@@ -58,13 +25,13 @@ module.exports.route = function(route) {
             });
 
             // Build initial state of all known routes (hardcoded routes should be minimal, and most should come from the server)
-            for (var i in _this.routes) {
-                var thisRoute = _this.routes[i];
+            //for (var i in _this.routes) {
+            //    var thisRoute = this.routes[req.url];
 
-                thisRoute.urls.forEach(function(url) {
+                route.urls.forEach(function(url) {
 
                     if (!initialState.pages[url]) {
-                        initialState.pages[url] = clone(thisRoute);
+                        initialState.pages[url] = clone(route);
                     }
 
                     for (var j in initialState.pages[url].pageLayout) {
@@ -73,16 +40,12 @@ module.exports.route = function(route) {
                         sections.forEach(function(section) {
                             section.uuid = uuid.v4();
                         });
-
                     }
 
-                }.bind());
+                });
+            //}
 
-
-
-            }
-
-            _.extend(initialState.pages[req.url], { datasource: _this.resolveData(route)} );
+            _.extend(initialState.pages[req.url], { datasource: this.resolveData(route)} );
 
             // Build initial component state
             for (var i in initialState.pages) {
@@ -102,17 +65,17 @@ module.exports.route = function(route) {
             }
 
 
-            _this._setInitialState(initialState);
-            _this._addReducer(_this._pageReducer);
-            _this._addHardCodedComponentReducers(initialState);
-            _this.appStore = Redux.createStore(_this._rootReducer);
+            this._setInitialState(initialState);
+            this._addReducer(this._pageReducer);
+            this._addHardCodedComponentReducers(initialState);
+            this.appStore = Redux.createStore(this._rootReducer);
 
-            var payload = _this.appStore.getState();
+            var payload = this.appStore.getState();
 
             var appHtml = ReactDOMServer.renderToString(React.createElement(
                 Provider,
-                { store: _this.appStore },
-                React.createElement(require('../App.jsx')(_this), payload)
+                { store: this.appStore },
+                React.createElement(require('../App.jsx')(this), payload)
             ));
 
             res.send(
@@ -127,7 +90,7 @@ module.exports.route = function(route) {
                 "</body>"
 
             );
-        })
+        }.bind(this))
     }.bind(this));
 
 };

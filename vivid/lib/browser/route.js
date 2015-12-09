@@ -3,6 +3,8 @@ var React = require('react');
 var Redux = require('redux');
 var Provider = require('react-redux').Provider;
 var _ = require('underscore');
+var clone = require('clone');
+var uuid = require('uuid');
 
 /*
  * route: loads a new route onto the router.
@@ -27,8 +29,33 @@ module.exports.route = function(route, data) {
             //Retrieve data if not supplied (this will be async)
             var data = typeof data !== "undefined" ? data : this.resolveData(route);
 
-            // Send a dispatch which rerenders the page based upon the page data.
-            this.appStore.dispatch({type: 'changePage', currentUrl : window.location.pathname, datasource: data, route: route});
+            if (!this.appStore.getState().pages[url]) {
+                var newPage = _.clone(route);
+
+                newPage.components = {};
+
+                for (var j in newPage.pageLayout) {
+                    var sections = newPage.pageLayout[j];
+
+                    sections.forEach(function(section) {
+
+                        section.uuid = uuid.v4();
+                        newPage.components[section.uuid] = {
+                            componentName: section.name
+                        }
+
+                        this._addComponentReducer(section.name, section.uuid);
+
+                    }.bind(this));
+                }
+
+                this.appStore.dispatch({type: 'changePage', currentUrl : window.location.pathname, datasource: data, route: newPage});
+
+            } else {
+                this.appStore.dispatch({type: 'changePage', currentUrl : window.location.pathname, datasource: data, route: route});
+            }
+
+
 
         }.bind(this));
 

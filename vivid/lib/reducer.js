@@ -46,6 +46,16 @@ module.exports._addHardCodedComponentReducers = function(initialState) {
 
 };
 
+module.exports._addComponentReducer = function(componentName, uuid) {
+
+    var Component = this.components[componentName];
+
+    if (Component.reducer) {
+        componentReducers.push({ reducer: Component.reducer, uuid: uuid});
+    }
+
+};
+
 module.exports._addReducer = function(reducer) {
     reducers.push(reducer)
 };
@@ -131,6 +141,11 @@ module.exports._pageReducer = function(state, action) {
 
         case "changePage":
             state.currentUrl = action.currentUrl;
+
+            if (!state.pages[action.currentUrl]) {
+                state.pages[action.currentUrl] = action.route
+            }
+
             if (action.datasource) {
                 state.pages[action.currentUrl] = _.extend({}, state.pages[action.currentUrl], {datasource: action.datasource});
             }
