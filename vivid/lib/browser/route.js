@@ -17,17 +17,23 @@ module.exports.route = function(route, data) {
 
     this.routes[route.name] = route;
 
-    this.router.on(route.url, function() {
 
-        // Render pipeline
+    route.urls.forEach(function(url) {
 
-        //Retrieve data if not supplied (this will be async)
-        var data = typeof data !== "undefined" ? data : this.resolveData(route);
+        this.router.on(url, function() {
 
-        // Send a dispatch which rerenders the page based upon the page data.
-        this.appStore.dispatch({type: 'changePage', currentUrl : window.location.pathname, datasource: data, route: route});
+            // Render pipeline
+
+            //Retrieve data if not supplied (this will be async)
+            var data = typeof data !== "undefined" ? data : this.resolveData(route);
+
+            // Send a dispatch which rerenders the page based upon the page data.
+            this.appStore.dispatch({type: 'changePage', currentUrl : window.location.pathname, datasource: data, route: route});
+
+        }.bind(this));
 
     }.bind(this));
+
 
 };
 

@@ -1,12 +1,12 @@
 var React = require('react');
-var uuid = require('uuid');
 
-// TODO: Research ability to not need dependency injection for ecosystem files - better to just have a pre-bound (this)?
 module.exports.register = function(Vivid) {
+
+
 
     Vivid.registerLayout({
         name: "admin/LayoutOneColumn",
-        component: require("./layout/LayoutOneColumn/LayoutOneColumn.jsx")(Vivid)
+        component: require("./layout/LayoutOneColumn/LayoutOneColumn.jsx")(Vivid)  // TODO: Research ability to not need dependency injection for ecosystem files
     });
 
     Vivid.registerLayout({
@@ -39,7 +39,7 @@ module.exports.register = function(Vivid) {
 module.exports.addRoutes = function(Vivid) {
 
     Vivid.route({
-        url: "/",
+        urls: ["/", "/admin"],
         name: "admin/routes",
         layout: "admin/LayoutTopBarRightMenu",
         resolve: [
@@ -52,23 +52,19 @@ module.exports.addRoutes = function(Vivid) {
             topBar : [
                 {
                     name: "admin/TopBar",
-                    type: "component",
-                    //TODO: make uuid creation part of the framework, not part of the API
-                    uuid: uuid.v4()
+                    type: "component"
                 }
             ],
             rightMenu : [
                 {
                     name: "admin/AdminNavComponent",
-                    type: "component",
-                    uuid: uuid.v4()
+                    type: "component"
                 }
             ],
             content : [
                 {
                     name: "admin/RouteManagerComponent",
-                    type: "component",
-                    uuid: uuid.v4()
+                    type: "component"
                 }
             ]
 
@@ -76,68 +72,54 @@ module.exports.addRoutes = function(Vivid) {
     });
 
     Vivid.route({
-        url: "/config",
+        urls: ["/config"],
         name: "admin/config",
         layout: "admin/LayoutTopBarRightMenu",
-        resolve: [
-            {
-                name: "configData"
-            }
-        ],
+        resolve: [],
         pageLayout: {
             topBar : [
                 {
                     name: "admin/TopBar",
-                    type: "component",
-                    uuid: uuid.v4()
+                    type: "component"
                 }
             ],
             rightMenu : [
                 {
                     name: "admin/AdminNavComponent",
-                    type: "component",
-                    uuid: uuid.v4()
+                    type: "component"
                 }
             ],
             content : [
                 {
                     name: "admin/RouteDescriptionComponent",
-                    type: "component",
-                    uuid: uuid.v4()
+                    type: "component"
                 }
             ]
         }
     });
 
     Vivid.route({
-        url: "/users",
+        urls: ["/users"],
         name: "admin/users",
         layout: "admin/LayoutTopBarRightMenu",
-        resolve: [
-            {
-                name: "userData"
-            }
-        ],
+        resolve: [],
         pageLayout: {
             topBar : [
                 {
                     name: "admin/TopBar",
-                    type: "component",
-                    uuid: uuid.v4()
+                    type: "component"
                 }
             ],
             rightMenu : [
                 {
                     name: "admin/AdminNavComponent",
-                    type: "component",
-                    uuid: uuid.v4()
+                    type: "component"
                 }
             ],
             content : [
                 {
                     name: "admin/RouteDescriptionComponent",
-                    type: "component",
-                    uuid: uuid.v4()
+                    type: "component"
                 }
             ]
         }

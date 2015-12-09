@@ -1,6 +1,5 @@
 var clone = require('clone');
 var _ = require('underscore');
-
 var reducers = [];
 var componentReducers = [];
 var initialState = {};
