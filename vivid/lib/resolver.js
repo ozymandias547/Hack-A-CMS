@@ -9,7 +9,6 @@ module.exports.resolveData = function(route) {
             resolvedData["core/routes"] = this.routes;
         }
 
-        console.log(resolveItem);
     }.bind(this));
 
     return resolvedData;

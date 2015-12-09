@@ -73,6 +73,7 @@ module.exports.reducer = function(state, action) {
     switch(action.type) {
 
         case "@@redux/INIT":
+        case "changePage":
             state.wizardValues = {
                 routeName: "Untitled",
                 urls: []

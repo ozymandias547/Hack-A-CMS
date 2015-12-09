@@ -24,7 +24,7 @@ _.extend(Vivid.prototype,
     require("./lib/register"),
     require("./lib/layout"),
     require("./lib/resolver"),
-    require("./lib/browser/reducer"),
+    require("./lib/reducer"),
     require("./lib/server/route")
 );
 

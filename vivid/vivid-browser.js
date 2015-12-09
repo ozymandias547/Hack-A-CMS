@@ -7,7 +7,7 @@ function Vivid() {
     this.components = {};
     this.routes = {};
     this.mode = "dev";
-    this.router = Router().configure({ html5history: true, run_handler_in_init: false });
+    this.router = Router().configure({ html5history: true, run_handler_in_init: false, notfound: this.unknownRoute });
 }
 
 _.extend(Vivid.prototype,
@@ -15,7 +15,7 @@ _.extend(Vivid.prototype,
     require("./lib/register"),
     require("./lib/layout"),
     require("./lib/resolver"),
-    require("./lib/browser/reducer"),
+    require("./lib/reducer"),
     require("./lib/browser/route"),
     require("./lib/browser/start")
 );

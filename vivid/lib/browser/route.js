@@ -25,8 +25,12 @@ module.exports.route = function(route, data) {
         var data = typeof data !== "undefined" ? data : this.resolveData(route);
 
         // Send a dispatch which rerenders the page based upon the page data.
-        this.appStore.dispatch({type: 'changePage', currentUrl : window.location.pathname, pageData: data, route: route});
+        this.appStore.dispatch({type: 'changePage', currentUrl : window.location.pathname, datasource: data, route: route});
 
     }.bind(this));
 
+};
+
+module.exports.unknownRoute = function() {
+    console.log("couldn't find the route...");
 };

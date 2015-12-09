@@ -35,20 +35,18 @@ module.exports.component = React.createClass({
 });
 
 
-module.exports.reducer = function(Vivid) {
+module.exports.reducer = function(state, action) {
 
-    return function(state, action) {
+    switch(action.type) {
+        case "@@redux/INIT":
+            state.currentFilter = "";
 
-        switch(action.type) {
-            case "@@redux/INIT":
-                state.currentFilter = "";
+            break;
+        case "FILTER_ROUTES":
+            state.currentFilter = action.filterByString;
+    }
 
-                break;
-            case "FILTER_ROUTES":
-                state.currentFilter = action.filterByString;
-        }
-
-        return state;
-    };
-
+    return state;
 };
+
+

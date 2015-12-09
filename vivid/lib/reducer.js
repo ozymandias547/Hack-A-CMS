@@ -33,7 +33,7 @@ module.exports._addHardCodedComponentReducers = function(initialState) {
 
                     var Component = this.components[part.name];
 
-                    if (Component.reducer) {
+                    if (typeof Component.reducer !== "undefined") {
                         componentReducers.push({ reducer: Component.reducer, uuid: part.uuid});
                     }
 
@@ -65,37 +65,36 @@ module.exports._rootReducer = function(state, action) {
 
         // TODO: Refactor for clarity
 
-        if (action.type === "@@redux/INIT") {
+        if (action.type === "@@redux/INIT" || action.type === "changePage") {
 
             // Loop through each component scope and run init on them.
 
-            for (var i in  newState.pages) {
-                var page = newState.pages[i];
+            var page = newState.pages[newState.currentUrl];
 
-                for (var j in page.components) {
-                    var componentState = page.components[j];
+            for (var j in page.components) {
+                var componentState = page.components[j];
 
-                    if (reducer.uuid === j) {
+                if (reducer.uuid === j) {
 
-                        var contract = Vivid.components[componentState.componentName].contract;
+                    var contract = Vivid.components[componentState.componentName].contract;
 
-                        if (contract) {
+                    if (contract) {
 
-                            componentState.data = {};
+                        componentState.data = {};
 
-                            for (var i in contract) {
-                                componentState.data[i] = page.datasource[contract[i]];
+                        for (var i in contract) {
+                            componentState.data[i] = page.datasource[contract[i]];
 
-                                newState = _.extend(newState, reducer.reducer(componentState, action));
-                            }
-                        } else {
-                            newState = _.extend(newState, reducer.reducer(componentState, action));
+                            page.components[j] = _.extend(page.components[j], reducer.reducer(componentState, action));
                         }
-
-
+                    } else {
+                        page.components[j] = _.extend(page.components[j], reducer.reducer(componentState, action));
                     }
+
+
                 }
             }
+
 
         } else {
 
@@ -133,8 +132,8 @@ module.exports._pageReducer = function(state, action) {
 
         case "changePage":
             state.currentUrl = action.currentUrl;
-            if (action.pageData) {
-                state.pages[action.currentUrl] = _.extend({}, state.pages[action.currentUrl], action.pageData);
+            if (action.datasource) {
+                state.pages[action.currentUrl] = _.extend({}, state.pages[action.currentUrl], {datasource: action.datasource});
             }
             break;
     }
