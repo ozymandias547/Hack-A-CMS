@@ -27,35 +27,41 @@ module.exports.route = function(route, data) {
             // Render pipeline
 
             //Retrieve data if not supplied (this will be async)
-            var data = typeof data !== "undefined" ? data : this.resolveData(route);
+            //var data = typeof data !== "undefined" ? data : this.resolveData(route);
 
-            if (!this.appStore.getState().pages[url]) {
-                var newPage = _.clone(route);
+            this.resolveData(route).then(function(datasource) {
 
-                newPage.components = {};
+                var data = datasource;
 
-                for (var j in newPage.pageLayout) {
-                    var sections = newPage.pageLayout[j];
+                if (!this.appStore.getState().pages[url]) {
+                    var newPage = _.clone(route);
 
-                    sections.forEach(function(section) {
+                    newPage.components = {};
 
-                        section.uuid = uuid.v4();
-                        newPage.components[section.uuid] = {
-                            componentName: section.name
-                        }
+                    for (var j in newPage.pageLayout) {
+                        var sections = newPage.pageLayout[j];
 
-                        this._addComponentReducer(section.name, section.uuid);
+                        sections.forEach(function(section) {
 
-                    }.bind(this));
+                            section.uuid = uuid.v4();
+                            newPage.components[section.uuid] = {
+                                componentName: section.name
+                            }
+
+                            this._addComponentReducer(section.name, section.uuid);
+
+                        }.bind(this));
+                    }
+
+                    this.appStore.dispatch({type: 'changePage', currentUrl : window.location.pathname, datasource: data, route: newPage});
+
+                } else {
+                    this.appStore.dispatch({type: 'changePage', currentUrl : window.location.pathname, datasource: data, route: route});
                 }
 
-                this.appStore.dispatch({type: 'changePage', currentUrl : window.location.pathname, datasource: data, route: newPage});
-
-            } else {
-                this.appStore.dispatch({type: 'changePage', currentUrl : window.location.pathname, datasource: data, route: route});
-            }
-
-
+            }.bind(this)).catch(function(error) {
+                console.error(error);
+            });
 
         }.bind(this));
 

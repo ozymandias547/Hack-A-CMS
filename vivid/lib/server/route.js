@@ -13,7 +13,7 @@ module.exports.route = function(route) {
 
     // Bind routes
     route.urls.forEach(function(url) {
-        this.express.get(url, function(req, res) {
+        this.express.get(url, function RouteHandlerFunction(req, res) {
 
             if (this.mode === "dev") {
                 adminEco.register(this);
@@ -24,26 +24,24 @@ module.exports.route = function(route) {
                 pages: {}
             });
 
-            // Build initial state of all known routes (hardcoded routes should be minimal, and most should come from the server)
-            //for (var i in _this.routes) {
-            //    var thisRoute = this.routes[req.url];
 
-                route.urls.forEach(function(url) {
 
-                    if (!initialState.pages[url]) {
-                        initialState.pages[url] = clone(route);
-                    }
+            if (!initialState.pages[req.url]) {
 
-                    for (var j in initialState.pages[url].pageLayout) {
-                        var sections = initialState.pages[url].pageLayout[j];
+                if (!this.routes[route.name]) {
+                    return res.send("not found! -Vivid cms staff");
+                }
 
-                        sections.forEach(function(section) {
-                            section.uuid = uuid.v4();
-                        });
-                    }
+                initialState.pages[req.url] = clone(this.routes[route.name]);
+            }
 
+            for (var j in initialState.pages[req.url].pageLayout) {
+                var sections = initialState.pages[req.url].pageLayout[j];
+
+                sections.forEach(function(section) {
+                    section.uuid = uuid.v4();
                 });
-            //}
+            }
 
             _.extend(initialState.pages[req.url], { datasource: this.resolveData(route)} );
 
@@ -92,5 +90,22 @@ module.exports.route = function(route) {
             );
         }.bind(this))
     }.bind(this));
+
+};
+
+module.exports.removelRouteHandlers = function(route) {
+
+    var routes = this.express._router.stack;
+
+    route.urls.forEach(function(url) {
+        routes.forEach(function(routeItem, i) {
+            if (routeItem.route) {
+
+                if (routeItem.route.path === url) {
+                    routes.splice(i, 1);
+                }
+            }
+        });
+    });
 
 };

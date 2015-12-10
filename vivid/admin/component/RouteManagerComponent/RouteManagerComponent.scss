@@ -42,6 +42,7 @@ button {
     border: 1px solid #D4D4D4;
     border-radius: 3px;
     padding: 10px;
+    background: white;
     -webkit-box-shadow: -1px 4px 5px -5px rgba(0,0,0,0.37);
     -moz-box-shadow: -1px 4px 5px -5px rgba(0,0,0,0.37);
     box-shadow: -1px 4px 5px -5px rgba(0,0,0,0.37);
@@ -120,6 +121,8 @@ button {
   .routeName {
     font-weight: bold;
     margin-bottom: 22px;
+    display: inline-block;
+    float: right;
   }
 
 }

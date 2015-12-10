@@ -13,13 +13,11 @@ var RouteItem = React.createClass({
                 )
             };
 
-            var componentItems = function(componentItem) {
+            var urlItems = function(url) {
                 return (
-                    <div>
-
-                    </div>
+                    <div>{url}</div>
                 )
-            };
+            }
 
             return (
                 <div className="routeItemContainer">
@@ -28,9 +26,10 @@ var RouteItem = React.createClass({
                     </div>
                     <div className="right-arrow"></div>
                     <div className="station">
-                        <div>Match urls:</div>
+                        <div><strong>Match urls:</strong></div>
                         <div className="stationItem">
-                            {this.props.route.url}
+
+                            {this.props.route.urls.map(urlItems)}
                         </div>
                     </div>
                     <div className="right-arrow"></div>

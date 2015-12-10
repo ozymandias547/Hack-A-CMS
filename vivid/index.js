@@ -13,6 +13,7 @@ var Vivid = function() {
     this.layouts = {};
     this.components = {};
     this.routes = {};
+    this.datasources = {};
     this.express = express();
     this.port = 8080;
     this.mode = "dev";
@@ -23,9 +24,10 @@ _.extend(Vivid.prototype,
     require("./lib/server/start"),
     require("./lib/register"),
     require("./lib/layout"),
-    require("./lib/resolver"),
+    require("./lib/server/resolver"),
     require("./lib/reducer"),
-    require("./lib/server/route")
+    require("./lib/server/route"),
+    require("./lib/server/coreJSONApi")
 );
 
 var vividSingleton = new Vivid();

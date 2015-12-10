@@ -34,6 +34,11 @@ module.exports.register = function(Vivid) {
         component: require("./component/TopBar/TopBarComponent.jsx")
     });
 
+    Vivid.registerDataSource({
+        name: "core/routes",
+        url: "http://localhost:8000/api/core/routes"
+    })
+
 };
 
 module.exports.addRoutes = function(Vivid) {
@@ -67,7 +72,6 @@ module.exports.addRoutes = function(Vivid) {
                     type: "component"
                 }
             ]
-
         }
     });
 
@@ -75,7 +79,11 @@ module.exports.addRoutes = function(Vivid) {
         urls: ["/config"],
         name: "admin/config",
         layout: "admin/LayoutTopBarRightMenu",
-        resolve: [],
+        resolve: [
+            {
+                datasource: "core/routes"
+            }
+        ],
         pageLayout: {
             topBar : [
                 {
@@ -90,6 +98,18 @@ module.exports.addRoutes = function(Vivid) {
                 }
             ],
             content : [
+                {
+                    name: "admin/RouteDescriptionComponent",
+                    type: "component"
+                },
+                {
+                    name: "admin/RouteManagerComponent",
+                    type: "component"
+                },
+                {
+                    name: "admin/RouteManagerComponent",
+                    type: "component"
+                },
                 {
                     name: "admin/RouteDescriptionComponent",
                     type: "component"

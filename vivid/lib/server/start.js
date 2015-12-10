@@ -14,12 +14,14 @@ module.exports.start = function() {
         });
     }
 
-
-
+    // Register ecosystem components and setup any hardcoded routes
     var adminEco = require('../../admin/admin');
-
     adminEco.register(this);
     adminEco.addRoutes(this);
+
+    this.setupMiddleWare();
+    this.setupCoreJSONApi();
+    //this.bindErrorHandler();
 
     this.express.listen(this.port, function () {
         console.log('Vivid App listening on port %d.', this.port);

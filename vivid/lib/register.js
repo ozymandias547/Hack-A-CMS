@@ -7,3 +7,7 @@ module.exports.registerLayout = function(layout) {
 module.exports.registerComponent = function(component) {
     this.components[component.name] = component.component;
 };
+
+module.exports.registerDataSource = function(datasource) {
+    this.datasources[datasource.name] = datasource;
+};

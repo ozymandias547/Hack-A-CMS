@@ -1,4 +1,4 @@
-// TODO: Define and build out this method.
+
 module.exports.resolveData = function(route) {
 
     var resolvedData = {};
