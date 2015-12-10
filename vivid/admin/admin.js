@@ -34,6 +34,11 @@ module.exports.register = function(Vivid) {
         component: require("./component/TopBar/TopBarComponent.jsx")
     });
 
+    Vivid.registerComponent({
+        name: "admin/RouteHistory",
+        component: require("./component/RouteHistory/RouteHistory.jsx")
+    });
+
     Vivid.registerDataSource({
         name: "core/routes",
         url: "http://localhost:8000/api/core/routes"
@@ -63,6 +68,10 @@ module.exports.addRoutes = function(Vivid) {
             rightMenu : [
                 {
                     name: "admin/AdminNavComponent",
+                    type: "component"
+                },
+                {
+                    name: "admin/RouteHistory",
                     type: "component"
                 }
             ],

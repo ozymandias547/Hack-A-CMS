@@ -22,8 +22,8 @@ module.exports = function(Vivid) {
             return (
                 <div className="LayoutTopBarRightMenu pure-g">
                     <div className="TopBar pure-u-1-1">{this.blocks.topBar}</div>
-                    <div className="Content pure-u-20-24">{this.blocks.content}</div>
-                    <div className="RightBar pure-u-4-24">{this.blocks.rightMenu}</div>
+                    <div className="Content pure-u-18-24">{this.blocks.content}</div>
+                    <div className="RightBar pure-u-6-24">{this.blocks.rightMenu}</div>
                 </div>
             );
 

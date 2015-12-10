@@ -1,14 +1,13 @@
 .AdminNavComponent {
-  background: #FFA955;
-  height: 100%;
+  background: #C7C7C7;
 
   a {
     font-size: 14px;
     display: block;
-    text-decoration: none;
     padding: 10px 20px;
     border-bottom: 1px solid #fff;
-    color: white;
+    color: #5D5DDC;
+    text-decoration: underline;
   }
 
   .active {

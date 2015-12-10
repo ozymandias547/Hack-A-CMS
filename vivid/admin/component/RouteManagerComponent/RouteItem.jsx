@@ -1,6 +1,6 @@
 var React = require('react');
 var _ = require('underscore');
-
+var classNames = require('classnames');
 
 var RouteItem = React.createClass({
     render: function() {
@@ -15,20 +15,25 @@ var RouteItem = React.createClass({
 
             var urlItems = function(url) {
                 return (
-                    <div>{url}</div>
+                    <div><a href={url}>{url}</a></div>
                 )
             }
 
+            var btnClass = classNames({
+                'routeItemContainer': true,
+                'selected': this.props.route.isSelected
+            });
+
             return (
-                <div className="routeItemContainer">
+                <div className={btnClass} onClick={this.onRouteContainerClick}>
                     <div className="routeName">
+                        {this.props.route.isSelected}
                         {this.props.route.name}
                     </div>
                     <div className="right-arrow"></div>
                     <div className="station">
                         <div><strong>Match urls:</strong></div>
                         <div className="stationItem">
-
                             {this.props.route.urls.map(urlItems)}
                         </div>
                     </div>
@@ -47,7 +52,12 @@ var RouteItem = React.createClass({
         } else {
             return null;
         }
+    },
+
+    onRouteContainerClick: function(e) {
+        this.props.dispatch({type: "ROUTE_ITEM_CONTAINER_CLICK",  sendToAllComponentsOnPage: true, clickedRoute: this.props.route})
     }
+
 });
 
 module.exports = RouteItem;

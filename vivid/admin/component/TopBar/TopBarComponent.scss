@@ -7,6 +7,13 @@
   background-image: -o-linear-gradient(top, #FFB368, #FFA955);
   background-image: linear-gradient(top, #FFB368, #FFA955);
 
+  -webkit-box-shadow: -1px -8px 26px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: -1px -8px 26px 0px rgba(0,0,0,0.75);
+  box-shadow: -1px -8px 26px 0px rgba(0,0,0,0.75);
+
+  position: relative;
+  z-index: 123;
+
   .title {
     color: white;
     font-size: 20px;

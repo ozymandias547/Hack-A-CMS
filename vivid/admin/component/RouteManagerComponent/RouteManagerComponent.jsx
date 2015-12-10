@@ -16,11 +16,12 @@ module.exports.component = React.createClass({
         var addRouteWizard = null;
         var addRouteCallToAction = null;
 
+
         var routeItem = function(route) {
             return (
-                <RouteItem route={route} />
+                <RouteItem route={route} dispatch={this.props.dispatch}/>
             )
-        };
+        }.bind(this);
 
         if (this.props.component.isAddRouteWizardOpen) {
             addRouteWizard = <AddRouteWizard wizardValues={this.props.component.wizardValues} dispatch={this.props.dispatch} componentId={this.props.componentId}/>;
@@ -83,6 +84,7 @@ module.exports.reducer = function(state, action) {
             state.routes = Object.keys(state.data.routes).map(function (key) {return state.data.routes[key]});
             state.routes = state.routes.map(function(route) {
                 route.isVisible = true;
+                route.isSelected = false;
                 return route;
             });
             break;
@@ -106,6 +108,18 @@ module.exports.reducer = function(state, action) {
             });
             break;
 
+        case "ADD_NEW_ROUTE_LOADED":
+            action.newRoute.isVisible = true;
+            state.routes.push(action.newRoute);
+            state.isAddRouteWizardOpen = false;
+            break;
+
+        case "ROUTE_ITEM_CONTAINER_CLICK":
+            state.routes.forEach(function(route) {
+                route.isSelected = false;
+            });
+            var clickedRoute = _.findWhere(state.routes, {name: action.clickedRoute.name});
+            clickedRoute.isSelected = !clickedRoute.isSelected;
     }
 
     return state;

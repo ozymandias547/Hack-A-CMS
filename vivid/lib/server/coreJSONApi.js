@@ -18,9 +18,9 @@ module.exports.setupCoreJSONApi = function() {
         })
         .post(function(req,res) {
 
-            if (!Vivid.routes[req.body.name]) {
+            if (!Vivid.routes[req.body.name] && req.body) {
                 Vivid.route(req.body);
-                return res.json({message: "success"});
+                return res.json(Vivid.routes[req.body.name]);
             } else {
                 return res.status(500).json({"message" : "Route already exists "});
             }

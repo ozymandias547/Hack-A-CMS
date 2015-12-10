@@ -25,11 +25,6 @@ module.exports.component = React.createClass({
                         Users
                     </a>
                 </div>
-                <div className={ this.props.currentUrl === "/users" ? "active" : "" }>
-                    <a href="/asdf" onClick={this.handleClick}>
-                        Unknown route
-                    </a>
-                </div>
             </div>
         );
     },

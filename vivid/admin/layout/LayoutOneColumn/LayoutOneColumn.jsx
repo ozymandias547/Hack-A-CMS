@@ -12,7 +12,7 @@ module.exports = function(Vivid) {
 
             // Build components array that will go into the blocks of the layout.
             this.blocks = {
-                content1 : Vivid.createBlockContent("content1", this.props.page)
+                content1 : Vivid.createBlockContent("content", this.props.page)
             };
 
             function createPayload() {
