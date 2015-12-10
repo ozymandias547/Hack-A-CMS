@@ -1,2 +1,2 @@
 # Zen
-A CMS for the masses.
+Finally a new Wordpress!
