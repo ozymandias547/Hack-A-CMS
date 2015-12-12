@@ -3,52 +3,65 @@ var _ = require('underscore');
 var $ = require('jquery');
 
 var AddRouteWizard = React.createClass({
+
     render: function() {
 
-        return (
-            <div className="AddRouteWizard">
-                <div className="titlebar">
-                    <input type="text" placeholder="route name..." ref="routeNameInput"/>
+        if (this.props.isOpen) {
+            return (
+                <div className="AddRouteWizard">
+                    <div className="titlebar">
+                        <input type="text" placeholder="route name..." ref="routeNameInput"/>
+                    </div>
+                    <div className="seperator-bar"></div>
+                    <div className="right-arrow"></div>
+                    <div className="station">
+                        <input type="text" placeholder="url" ref="url"/>
+                    </div>
+                    <div className="right-arrow"></div>
+                    <div className="station">
+                        <div>Check Security</div>
+                    </div>
+                    <div className="right-arrow"></div>
+                    <div className="station">
+                        <div>Gather Data</div>
+                    </div>
+                    <div className="right-arrow"></div>
+                    <div className="station">
+                        <div>Render Page</div>
+                    </div>
+                    <div className="right-arrow"></div>
+                    <div className="station">
+                        <div>Apply Skin</div>
+                    </div>
+                    <div className="right-arrow"></div>
+                    <div className="seperator-bar"></div>
+                    <div>
+                        <button className="add" onClick={this.onAddClick}>Add</button>
+                        <button className="cancel" onClick={this.onCancelClick}>Cancel</button>
+                    </div>
                 </div>
-                <div className="seperator-bar"></div>
-                <div className="right-arrow"></div>
-                <div className="station">
-                    <input type="text" placeholder="url" ref="url"/>
+            )
+        } else {
+            return (
+                <div className="toolbar">
+                    <a href="" onClick={this.onAddRouteClick}>Add route...</a>
                 </div>
-                <div className="right-arrow"></div>
-                <div className="station">
-                    <div>Check Security</div>
-                </div>
-                <div className="right-arrow"></div>
-                <div className="station">
-                    <div>Gather Data</div>
-                </div>
-                <div className="right-arrow"></div>
-                <div className="station">
-                    <div>Render Page</div>
-                </div>
-                <div className="right-arrow"></div>
-                <div className="station">
-                    <div>Apply Skin</div>
-                </div>
-                <div className="right-arrow"></div>
-                <div className="seperator-bar"></div>
-                <div>
-                    <button className="add" onClick={this.onAddClick}>Add</button>
-                    <button className="cancel" onClick={this.onCancelClick}>Cancel</button>
-                </div>
-            </div>
-        );
+            )
+        }
+
     },
+
     onCancelClick: function(e) {
         this.props.dispatch({type: "NEWROUTEWIZARD_VISIBILITY", isAddRouteWizardOpen: false, componentId: this.props.componentId})
     },
+
     componentDidMount: function(){
-        this.refs.routeNameInput.focus();
+        if (this.refs.routeNameInput) {
+            this.refs.routeNameInput.focus();
+        }
     },
+
     onAddClick: function(e) {
-
-
 
         this.props.dispatch({type: "ADD_NEW_ROUTE_LOADING", componentId: this.props.componentId});
 
@@ -76,8 +89,40 @@ var AddRouteWizard = React.createClass({
             }.bind(this)
         })
 
+    },
+
+    onAddRouteClick: function(e) {
+
+        e.preventDefault();
+
+        this.props.dispatch({
+            type: "NEWROUTEWIZARD_VISIBILITY",
+            isAddRouteWizardOpen: true,
+            componentId: this.props.componentId
+        });
     }
 
 });
 
+var listeners = function(props, action) {
+
+    action.onAction("@@redux/INIT changePage", function() {
+        props.routeName= "Untitled";
+        props.urls = [];
+        props.isOpen = false;
+    });
+
+    action.onAction("NEWROUTEWIZARD_VISIBILITY", function() {
+        props.isOpen = action.isAddRouteWizardOpen;
+    });
+
+    action.onAction("ADD_NEW_ROUTE_LOADED", function() {
+        props.isOpen = false;
+    });
+
+};
+
+
+
 module.exports = AddRouteWizard;
+module.exports.listeners = listeners;

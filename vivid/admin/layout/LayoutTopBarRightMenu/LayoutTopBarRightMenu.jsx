@@ -20,7 +20,7 @@ module.exports = function(Vivid) {
             };
 
             return (
-                <div className="LayoutTopBarRightMenu pure-g">
+                <div className="LayoutTopBarRightMenu pure-g" onClick={this.onBodyClick}>
                     <div className="TopBar pure-u-1-1">{this.blocks.topBar}</div>
                     <div className="Content pure-u-18-24">{this.blocks.content}</div>
                     <div className="RightBar pure-u-6-24">{this.blocks.rightMenu}</div>
@@ -31,6 +31,10 @@ module.exports = function(Vivid) {
         componentDidMount: function() {
             document.querySelector(".RightBar").style.height = window.innerHeight - document.querySelector(".RightBar").getClientRects()[0].top
             document.querySelector(".Content").style.height = window.innerHeight - document.querySelector(".Content").getClientRects()[0].top
+        },
+
+        onBodyClick: function(e) {
+            this.props.dispatch({type: "BODY_CLICK", sendToAllComponentsOnPage: true});
         }
     });
 

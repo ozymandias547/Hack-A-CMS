@@ -4,6 +4,7 @@ var reducers = [];
 var componentReducers = [];
 var initialState = {};
 var Vivid;
+var deepcopy = require('deepcopy');
 
 module.exports._addHardCodedComponentReducers = function(initialState) {
 
@@ -62,6 +63,18 @@ module.exports._addReducer = function(reducer) {
 
 module.exports._rootReducer = function(state, action) {
 
+    action.onAction = function(constant, cb) {
+
+        var constants = constant.split(" ");
+
+        constants.forEach(function(constant) {
+            if(constant === action.type) {
+                cb();
+            }
+        });
+
+    };
+
     var state = state || initialState;
 
     var newState = clone(state);
@@ -92,7 +105,10 @@ module.exports._rootReducer = function(state, action) {
                         componentState.data = {};
 
                         for (var i in contract) {
-                            componentState.data[i] = page.datasource[contract[i]];
+
+                            action.pageData = {};
+                            action.pageData[i] =  deepcopy(page.datasource[contract[i]]);
+
 
                             page.components[j] = _.extend(page.components[j], reducer.reducer(componentState, action));
                         }
