@@ -1,2 +1,2 @@
-# Vivid
-A CMS for the masses.
+# Zen
+Finally a new Wordpress!
