@@ -1,2 +1,2 @@
-# Zen
+# Slick
 Finally a new Wordpress!
