@@ -19,17 +19,17 @@ module.exports.route = function(route, data) {
 
     this.routes[route.name] = route;
 
-
     route.urls.forEach(function(url) {
 
         this.router.on(url, function() {
 
-            // Render pipeline
+            var params = Array.prototype.slice.call(arguments);
 
-            //Retrieve data if not supplied (this will be async)
-            //var data = typeof data !== "undefined" ? data : this.resolveData(route);
+            params = params.map(function(param) {
+                return decodeURIComponent(param);
+            });
 
-            this.resolveData(route).then(function(datasource) {
+            this.resolveData(route, params).then(function(datasource) {
 
                 var data = datasource;
 

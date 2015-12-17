@@ -44,6 +44,11 @@ module.exports.register = function(Moxi) {
         component: require("./component/RouteHistory/RouteHistory.jsx")
     });
 
+    Moxi.registerComponent({
+        name: "admin/PageBuilder",
+        component: require("./component/PageBuilder/PageBuilder.jsx")
+    });
+
     Moxi.registerDataSource({
         name: "core/routes",
         deps: {},
@@ -89,7 +94,7 @@ module.exports.register = function(Moxi) {
 
                 request({
                     method:'GET',
-                    url: 'http://localhost:8000/api/core/routes/' + decodeURIComponent(deps.routeName),
+                    url: 'http://localhost:8000/api/core/routes/' + encodeURIComponent(deps.routeName),
                     json:true
                 }, function(er, response, body) {
                     next(body);
@@ -163,7 +168,10 @@ module.exports.addRoutes = function(Moxi) {
 
             ],
             content : [
-
+                {
+                    name: "admin/PageBuilder",
+                    type: "component"
+                }
             ]
         }
     });

@@ -1,6 +1,6 @@
 var q = require('q');
 
-module.exports.resolveData = function(route) {
+module.exports.resolveData = function(route, params) {
 
     var promises = [];
 
@@ -12,6 +12,17 @@ module.exports.resolveData = function(route) {
         promises.push((function() {
 
             var deferred = q.defer();
+            var paramIndex = 0;
+
+            for (var i in dataSource.deps) {
+
+                var resolveItemDepFulfillment = resolveItem.dataSourceDeps[i];
+
+                if (resolveItemDepFulfillment.type === "param") {
+                    dataSourceDeps[i] = params[paramIndex]
+                    paramIndex++;
+                }
+            }
 
             dataSource.browser.middleware(dataSourceDeps, deferred.resolve);
 

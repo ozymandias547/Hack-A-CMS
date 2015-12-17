@@ -43,7 +43,7 @@ module.exports.route = function(route) {
                 });
             }
 
-            this.resolveData(route).then(function(datasource) {
+            this.resolveData(route, req.params).then(function(datasource) {
 
                 _.extend(initialState.pages[req.url], { datasource: datasource} );
 

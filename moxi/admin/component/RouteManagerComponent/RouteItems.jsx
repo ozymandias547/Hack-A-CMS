@@ -2,6 +2,7 @@ var React = require('react');
 var _ = require('underscore');
 var classNames = require('classnames');
 var UrlStation = require('./stations/UrlStation.jsx');
+var DataStation = require('./stations/DataStation.jsx');
 
 var RouteItems = React.createClass({
 
@@ -37,7 +38,7 @@ var RouteItems = React.createClass({
                             </div>
                             <div className="right-arrow"></div>
                             <div className="station">
-                                <a href={"/page-layout/" + encodeURIComponent(route.name)} data-internal-link>Render Page into layout</a>
+                                <a href={"/page-layout/" + encodeURIComponent(route.name)} data-internal-link>Build Page</a>
                             </div>
                             <div className="right-arrow"></div>
                             {!route.needsToBeSaved ? null : (

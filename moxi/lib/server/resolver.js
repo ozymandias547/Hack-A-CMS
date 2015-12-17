@@ -9,11 +9,6 @@ var Promise = require('bluebird');
 
 module.exports.resolveData = function(route, params) {
 
-    for (var i in params) {
-        var param = params[i];
-        resolvedData[i] = param;
-    }
-
     var promises = [];
 
     route.resolve.forEach(function (resolveItem) {
@@ -36,13 +31,15 @@ module.exports.resolveData = function(route, params) {
                 dataSource.server.middleware.call(this, dataSourceDeps, resolve, reject);
             }.bind(this))
 
-        })())
+        }.bind(this))())
 
     }.bind(this));
 
     return Promise.all(promises).then(function (data) {
 
         var finalPageData = {};
+
+        _.extend(finalPageData, params);
 
         data.forEach(function (bit, idx) {
             finalPageData[route.resolve[idx].datasource] = bit;
