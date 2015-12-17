@@ -1,4 +1,4 @@
-var Vivid = require('../../../vivid/index.js');    // When vivid is an npm package, this will be require('vivid');
+var Moxi = require('../../../moxi/index.js');    // When vivid is an npm package, this will be require('vivid');
 
 var envs = {
     dev: {
@@ -11,8 +11,8 @@ var envs = {
     }
 };
 
-Vivid.configure(envs["dev"]);
-Vivid.start();
+Moxi.configure(envs["dev"]);
+Moxi.start();
 
 
 

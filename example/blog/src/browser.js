@@ -1,4 +1,4 @@
-var Vivid = require('../../../vivid/vivid-browser.js');
+var Moxi = require('../../../moxi/browser.js');
 
 var envs = {
     dev: {
@@ -6,6 +6,6 @@ var envs = {
     }
 };
 
-Vivid.configure(envs["dev"]);
-Vivid.start();
+Moxi.configure(envs["dev"]);
+Moxi.start();
 

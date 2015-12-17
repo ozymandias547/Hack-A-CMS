@@ -9,7 +9,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
     context: gruntConfig.srcPath,
     entry: {
-		vividapp: gruntConfig.browserEntry
+		moxiapp: gruntConfig.browserEntry
 	},
 	output: {
 		path: gruntConfig.assets,
@@ -43,7 +43,8 @@ module.exports = {
 		]
 	},
     plugins: [
-        new ExtractTextPlugin("[name].css")
+        new ExtractTextPlugin("[name].css"),
+        new webpack.IgnorePlugin(new RegExp("^(request)$"))
     ]
 };
 
