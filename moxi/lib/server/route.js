@@ -93,6 +93,7 @@ module.exports.route = function(route) {
 
             }.bind(this)).catch(function(error) {
                 console.error(error);
+                console.error(error.stack);
             });
 
         }.bind(this))

@@ -1,10 +1,11 @@
 var React = require('react');
 var _ = require('underscore');
 var AddRouteWizard = require('./AddRouteWizard.jsx');
-var AddRouteWizardListeners = require('./AddRouteWizard.jsx').listeners;
+var AddRouteWizardListeners = require('./AddRouteWizard.jsx').reducers;
 var RouteItems = require('./RouteItems.jsx');
-var RouteItemsReducer = require('./RouteItems.jsx').listeners;
+var RouteItemsReducer = require('./RouteItems.jsx').reducers;
 var utils = require('../../../lib/utils');
+var shortid = require('shortid');
 
 utils.runOnBrowser(function() {
     require('./RouteManagerComponent.scss');
@@ -35,18 +36,23 @@ module.exports.component = React.createClass({
 /*
  * Reducer only has access to this components state.  it can listen to all events going through the system though.
  */
-module.exports.reducer = function(state, action) {
+module.exports.reducer = function(props, action) {
 
-    if (!state.AddRouteWizard) {
-        state.AddRouteWizard = {};
+    // Build the namespaces for each individual component;
+    if (!props.AddRouteWizard) {
+        props.AddRouteWizard = {
+            id: shortid.generate()
+        }
     }
 
-    if (!state.RouteItems) {
-        state.RouteItems = [];
+    if (!props.RouteItems) {
+        props.RouteItems = {
+            id: shortid.generate()
+        }
     }
 
-    AddRouteWizardListeners(state.AddRouteWizard, action);
-    RouteItemsReducer(state.RouteItems, action);
+    AddRouteWizardListeners(props.AddRouteWizard, action);
+    RouteItemsReducer(props.RouteItems, action);
 
-    return state;
+    return props;
 };

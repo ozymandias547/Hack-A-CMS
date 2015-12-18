@@ -27,6 +27,7 @@
     "redux": "^3.0.4",
     "redux-devtools": "^2.1.5",
     "request": "2.63.0",
+    "shortid": "^2.2.4",
     "underscore": "^1.8.3",
     "uuid": "^2.0.1"
   },

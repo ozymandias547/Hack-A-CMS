@@ -2,8 +2,6 @@ var React = require('react');
 
 module.exports.register = function(Moxi) {
 
-
-
     Moxi.registerLayout({
         name: "admin/LayoutOneColumn",
         component: require("./layout/LayoutOneColumn/LayoutOneColumn.jsx")(Moxi)  // TODO: Research ability to not need dependency injection for ecosystem files

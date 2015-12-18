@@ -68,9 +68,30 @@ module.exports._rootReducer = function(state, action) {
         var constants = constant.split(" ");
 
         constants.forEach(function(constant) {
+
             if(constant === action.type) {
                 cb();
             }
+
+        });
+
+    };
+
+    action.onActionFromThisComponent = function(constant, cb, props) {
+
+        var constants = constant.split(" ");
+
+        constants.forEach(function(constant) {
+
+            if(constant === action.type && (constant === "@@redux/INIT" || constant === "changePage" )) {
+                cb();
+            }
+            else if (typeof props !== "undefined") {
+                if (constant === action.type && props.id === action.id) {
+                    cb();
+                }
+            }
+
         });
 
     };

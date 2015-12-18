@@ -108,7 +108,7 @@ var AddRouteWizard = React.createClass({
 
 });
 
-var listeners = function(props, action) {
+var reducers = function(props, action) {
 
     action.onAction("@@redux/INIT changePage", function() {
         props.routeName= "Untitled";
@@ -129,4 +129,4 @@ var listeners = function(props, action) {
 
 
 module.exports = AddRouteWizard;
-module.exports.listeners = listeners;
+module.exports.reducers = reducers;
