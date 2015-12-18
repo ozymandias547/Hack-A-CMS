@@ -63,6 +63,8 @@ module.exports._addReducer = function(reducer) {
 
 module.exports._rootReducer = function(state, action) {
 
+    var now = Date.now();
+
     action.onAction = function(constant, cb) {
 
         var constants = constant.split(" ");
@@ -162,6 +164,11 @@ module.exports._rootReducer = function(state, action) {
         }
 
     });
+
+    var then = Date.now();
+
+    var elapsed = then - now;
+    console.log("\'%s\' reducers took %f ms",action.type, elapsed);
 
     return newState;
 

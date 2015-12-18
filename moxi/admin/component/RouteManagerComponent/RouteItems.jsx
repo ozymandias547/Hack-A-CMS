@@ -55,12 +55,6 @@ var reducers = function(props, action) {
         props.routes.push(action.newRoute);
     });
 
-    action.onAction("ROUTE_ITEM_CONTAINER_CLICK BODY_CLICK", function() {
-        props.routes.forEach(function(route) {
-            route.isSelected = false;
-        });
-    });
-
     setupChildReducers(props, action);
 
 };

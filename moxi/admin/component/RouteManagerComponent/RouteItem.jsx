@@ -115,6 +115,10 @@ var RouteItem = React.createClass({
 
 function reducers(props, action) {
 
+    action.onAction("ROUTE_ITEM_CONTAINER_CLICK BODY_CLICK", function() {
+        props.isSelected = false;
+    });
+
     action.onActionFromThisComponent("ROUTE_ITEM_CONTAINER_CLICK", function() {
         props.isSelected = !props.isSelected;
     }, props);

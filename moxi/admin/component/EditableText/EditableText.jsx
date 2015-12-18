@@ -6,9 +6,13 @@ var EditableText = React.createClass({
         return (
             <div>
                 {this.props.isEditing ? (
-                    <div onClick={this.onToggleEdit}>{this.props.url} is editing</div>
+                    <input type="text" defaultValue={this.props.url} autofocus ref={function(input) {
+                        if (input != null) {
+                            input.setSelectionRange(0,input.value.length);
+                        }
+                    }}/>
                 ) : (
-                    <div onClick={this.onToggleEdit}>{this.props.url} isn't editing.</div>
+                    <div onClick={this.onToggleEdit}>{this.props.url}</div>
                 )}
             </div>
         )
@@ -18,7 +22,6 @@ var EditableText = React.createClass({
 
         this.props.dispatch({
             type: "URL_IS_EDITING",
-            componentId: this.props.componentId,
             id: this.props.id
         })
     }
@@ -27,7 +30,7 @@ var EditableText = React.createClass({
 
 function reducer (props, action) {
 
-    action.onAction("@@redux/INIT changePage", function() {
+    action.onAction("@@redux/INIT changePage URL_IS_EDITING BODY_CLICK", function() {
        props.isEditing = false;
     });
 
