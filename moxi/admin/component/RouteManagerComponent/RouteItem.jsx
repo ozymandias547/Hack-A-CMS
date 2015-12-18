@@ -127,6 +127,13 @@ function reducers(props, action) {
         props.isVisible = props.name.indexOf(action.filterByString) !== -1;
     });
 
+    action.onAction("EDITABLE_TEXT_NEW_CHANGES", function() {
+        var url = _.findWhere(props.urls, {id: action.id});
+        if (url) {
+            props.needsToBeSaved = true;
+        }
+    }, props);
+
     setupChildReducers(props, action);
 
 };

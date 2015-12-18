@@ -6,36 +6,57 @@ var EditableText = React.createClass({
         return (
             <div>
                 {this.props.isEditing ? (
-                    <input type="text" defaultValue={this.props.url} autofocus ref={function(input) {
+                    <input type="text" onKeyUp={this.onInputKeyUp} defaultValue={this.props.url} autofocus ref={function(input) {
                         if (input != null) {
                             input.setSelectionRange(0,input.value.length);
                         }
                     }}/>
                 ) : (
-                    <div onClick={this.onToggleEdit}>{this.props.url}</div>
+                    <div onClick={this.onStartEditing}>{this.props.url}</div>
                 )}
             </div>
         )
     },
 
-    onToggleEdit: function(e) {
-
+    onStartEditing: function(e) {
         this.props.dispatch({
-            type: "URL_IS_EDITING",
+            type: "EDITABLE_TEXT_START_EDITING",
+            componentId: this.props.componentId,
             id: this.props.id
         })
+    },
+
+    onInputKeyUp: function(e) {
+
+        if (e.which === 13) {
+            this.props.dispatch({
+                type: "EDITABLE_TEXT_NEW_CHANGES",
+                componentId: this.props.componentId,
+                id: this.props.id,
+                newValue: e.currentTarget.value
+            })
+        }
     }
 
 });
 
 function reducer (props, action) {
 
-    action.onAction("@@redux/INIT changePage URL_IS_EDITING BODY_CLICK", function() {
+    action.onAction("@@redux/INIT changePage BODY_CLICK", function() {
        props.isEditing = false;
     });
 
-    action.onActionFromThisComponent("URL_IS_EDITING", function() {
+    action.onAction("BODY_CLICK", function() {
+        props.isEditing = false;
+    });
+
+    action.onActionFromThisComponent("EDITABLE_TEXT_START_EDITING", function() {
         props.isEditing = !props.isEditing;
+    }, props);
+
+    action.onActionFromThisComponent("EDITABLE_TEXT_NEW_CHANGES", function() {
+        props.isEditing = false;
+        props.url = action.newValue;
     }, props);
 
     return props;
